@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WGU App</string>
+    <string name="title_activity_term_list">TermList</string>
+    <string name="landing_terms">Terms</string>
+    <string name="landing_courses">Courses</string>
+
+    <string name="button_add_term">Add Term</string>
+    <string name="button_delete_term">Delete Term</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+
+
+
+
+</resources>

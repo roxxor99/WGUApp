@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".AddTerms">
+
+
+    <TextView
+        android:id="@+id/tvTermViewTerm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Term id"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/lblTermViewStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="49dp"
+        android:text="@string/start_date"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/lblTermViewEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="89dp"
+        android:text="@string/end_date"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvTermViewStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignStart="@+id/tvTermViewEndDate"
+        android:layout_alignTop="@+id/lblTermViewStartDate"
+        android:text="2018-01-01"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvTermViewEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/lblTermViewEndDate"
+        android:layout_marginStart="111dp"
+        android:text="2018-06-30"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/lblTermViewCourses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="125dp"
+        android:text="@string/landing_courses"
+        android:textSize="18sp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lblTermViewCourses"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
