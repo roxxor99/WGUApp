@@ -12,55 +12,71 @@
 
 
     <TextView
-        android:id="@+id/tvTermViewTerm"
-        android:layout_width="wrap_content"
+        android:id="@+id/lblTermViewTermName"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ptTermViewTermName"
+        android:layout_alignParentStart="true"
+        android:text="@string/name"
+        android:textAlignment="textEnd"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/ptTermViewTermName"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Term id"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="30sp" />
+        android:layout_marginEnd="15dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Term 1"
+        android:textAlignment="viewStart"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/lblTermViewStartDate"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="79dp"
         android:text="@string/start_date"
-        android:textSize="18sp" />
+        android:textAlignment="textEnd"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/ptTermViewStartDate"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lblTermViewStartDate"
+        android:layout_alignStart="@+id/ptTermViewTermName"
+        android:ems="10"
+        android:inputType="date"
+        android:text="2018-01-01"
+        android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/lblTermViewEndDate"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ptTermViewEndDate"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="89dp"
         android:text="@string/end_date"
-        android:textSize="18sp" />
+        android:textAlignment="textEnd"
+        android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/tvTermViewStartDate"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/ptTermViewEndDate"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-
-
-        android:layout_alignStart="@+id/tvTermViewEndDate"
-        android:layout_alignTop="@+id/lblTermViewStartDate"
-        android:text="2018-01-01"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tvTermViewEndDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/lblTermViewEndDate"
-        android:layout_marginStart="111dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/ptTermViewTermName"
+        android:layout_marginTop="132dp"
+        android:ems="10"
+        android:inputType="date"
         android:text="2018-06-30"
-        android:textSize="18sp" />
+        android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/lblTermViewCourses"
@@ -68,15 +84,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="220dp"
         android:text="@string/landing_courses"
-        android:textSize="18sp" />
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/lblTermViewCourses"
-            android:layout_centerHorizontal="true" />
+    <ListView
+        android:id="@+id/lvCourseList"
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:scrollbars="horizontal|vertical" />
 
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btnTermViewDeleteTerm"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_above="@+id/lblTermViewCourses"
+        android:layout_alignEnd="@+id/ptTermViewTermName"
+        android:layout_marginBottom="-220dp"
+        android:text="@string/button_delete_term"
+        android:textSize="12sp" />
+
+</RelativeLayout>
 

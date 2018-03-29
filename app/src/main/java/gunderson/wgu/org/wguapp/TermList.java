@@ -8,21 +8,9 @@ import android.widget.Button;
 
 public class TermList extends AppCompatActivity {
 
-    Button btnAddTerm;
-    Button btnDeleteTerm;
+    public Button btnAddTerm;
+
     // need to add array and adapter info https://www.youtube.com/watch?v=ws_p8LJ4Uq8
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_list);
-
-        btnAddTerm = (Button) findViewById(R.id.btnAddTerm);
-        btnDeleteTerm = (Button) findViewById(R.id.btnDeleteTerm);
-
-
-    }
-
     public void addTerms() {
         btnAddTerm = (Button) findViewById(R.id.btnAddTerm);
         btnAddTerm.setOnClickListener(new View.OnClickListener() {
@@ -33,15 +21,22 @@ public class TermList extends AppCompatActivity {
             }
         });
     }
-    //Needs updated still
-//    public void deleteTerms() {
-//        btnDeleteTerm = (Button) findViewById(R.id.btnDeleteTerm);
-//        btnDeleteTerm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent deleteTerm = new Intent(landing.this, AddTerms.class);
-//                startActivity(deleteTerm);
-//            }
-//        });
-//    }
-}
+
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_term_list);
+        //calls the method to screen change
+        addTerms();
+
+
+    }
+
+
+    }
+
