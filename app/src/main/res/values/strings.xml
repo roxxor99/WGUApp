@@ -10,8 +10,12 @@
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
     <string name="name">Name</string>
-
-
+    <string name="termName">Term Name</string>
+    <string name="addCourses">Add Courses</string>
+    <string name="deleteTerm">Delete Term</string>
+    <string name="addTerms">Add Term</string>
+    <string name="startDateEx">Start Date:  01-01-2018</string>
+    <string name="endDateEx">End Date:  06-30-2018</string>
 
 
 </resources>

@@ -11,103 +11,85 @@
         tools:context=".AddTerms">
 
 
-    <TextView
-        android:id="@+id/lblTermViewTermName"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ptTermViewTermName"
-        android:layout_alignParentStart="true"
-        android:text="@string/name"
-        android:textAlignment="textEnd"
-        android:textSize="15sp" />
-
     <EditText
-        android:id="@+id/ptTermViewTermName"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="15dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Term 1"
-        android:textAlignment="viewStart"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/lblTermViewStartDate"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="79dp"
-        android:text="@string/start_date"
-        android:textAlignment="textEnd"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/ptTermViewStartDate"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lblTermViewStartDate"
-        android:layout_alignStart="@+id/ptTermViewTermName"
-        android:ems="10"
-        android:inputType="date"
-        android:text="2018-01-01"
-        android:textAlignment="viewStart" />
-
-    <TextView
-        android:id="@+id/lblTermViewEndDate"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ptTermViewEndDate"
-        android:layout_alignParentStart="true"
-        android:text="@string/end_date"
-        android:textAlignment="textEnd"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/ptTermViewEndDate"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/ptTermViewTermName"
-        android:layout_marginTop="132dp"
-        android:ems="10"
-        android:inputType="date"
-        android:text="2018-06-30"
-        android:textAlignment="viewStart" />
-
-    <TextView
-        android:id="@+id/lblTermViewCourses"
-        android:layout_width="wrap_content"
+        android:id="@+id/ptAddTermsTermName"
+        android:layout_width="351dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp"
-        android:text="@string/landing_courses"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/termName"
+        android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/lvCourseList"
-        android:layout_width="match_parent"
-        android:layout_height="224dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:scrollbars="horizontal|vertical" />
+    <EditText
+        android:id="@+id/ptAddTermsStartDate"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:ems="10"
+        android:hint="@string/startDateEx"
+        android:inputType="date"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsTermName" />
+
+    <EditText
+        android:id="@+id/ptAddTermsEndDate"
+        android:layout_width="349dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ptAddTermsStartDate"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/endDateEx"
+        android:inputType="date"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsStartDate" />
 
     <Button
-        android:id="@+id/btnTermViewDeleteTerm"
+        android:id="@+id/btnAddTermsAddCourses"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="178dp"
+        android:text="@string/addCourses" />
+
+    <ListView
+        android:id="@+id/lvAddTermCourseList"
+        android:layout_width="356dp"
+        android:layout_height="206dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="64dp"
+        android:layout_marginStart="18dp" />
+
+    <Button
+        android:id="@+id/btnAddTermsDeleteTerm"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_above="@+id/lblTermViewCourses"
-        android:layout_alignEnd="@+id/ptTermViewTermName"
-        android:layout_marginBottom="-220dp"
-        android:text="@string/button_delete_term"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="0dp"
+        android:text="@string/deleteTerm"
+        android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
+
 
 </RelativeLayout>
 

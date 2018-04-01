@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TermList" />
-        <activity android:name=".AddTerms"></activity>
+        <activity android:name=".AddTerms" />
     </application>
 
 </manifest>
