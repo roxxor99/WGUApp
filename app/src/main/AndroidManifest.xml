@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".TermList" />
         <activity android:name=".AddTerms" />
+        <activity android:name=".CourseList" />
+        <activity android:name=".CourseDetails"></activity>
     </application>
 
 </manifest>
