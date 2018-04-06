@@ -19,7 +19,9 @@
         <activity android:name=".TermList" />
         <activity android:name=".AddTerms" />
         <activity android:name=".CourseList" />
-        <activity android:name=".CourseDetails"></activity>
+        <activity android:name=".CourseDetails" />
+        <activity android:name=".MentorDetails" />
+        <activity android:name=".MentorList"></activity>
     </application>
 
 </manifest>

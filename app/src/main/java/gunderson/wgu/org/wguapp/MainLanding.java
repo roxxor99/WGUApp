@@ -33,10 +33,10 @@ public class MainLanding extends AppCompatActivity {
                     Intent openCourses = new Intent(MainLanding.this, CourseList.class);
                     startActivity(openCourses);
                     break;
-//                case R.id.btnMentors:
-//                    Intent openMentors = new Intent(MainLanding.this, MentorList.class);
-//                    startActivity(openMentors);
-//                    break;
+                case R.id.btnMentors:
+                    Intent openMentors = new Intent(MainLanding.this, MentorList.class);
+                    startActivity(openMentors);
+                    break;
 
 
             }

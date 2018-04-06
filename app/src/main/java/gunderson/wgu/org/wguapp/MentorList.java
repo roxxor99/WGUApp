@@ -6,18 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class TermList extends AppCompatActivity {
+public class MentorList extends AppCompatActivity {
 
-    public Button btnAddTerm;
+    public Button btnAddMen;
 
     // need to add array and adapter info https://www.youtube.com/watch?v=ws_p8LJ4Uq8
-    public void addTerms() {
-        btnAddTerm = (Button) findViewById(R.id.btnAddMen);
-        btnAddTerm.setOnClickListener(new View.OnClickListener() {
+    public void addMentors() {
+        btnAddMen = (Button) findViewById(R.id.btnAddMen);
+        btnAddMen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addTerm = new Intent(TermList.this, AddTerms.class);
-                startActivity(addTerm);
+                Intent addMentor = new Intent(MentorList.this, MentorDetails.class);
+                startActivity(addMentor);
             }
         });
     }
@@ -26,13 +26,8 @@ public class TermList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_list);
-        //calls the method to screen change
-        addTerms();
+        setContentView(R.layout.activity_mentor_list);
 
-
+        addMentors();
     }
-
-
-    }
-
+}

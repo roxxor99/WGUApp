@@ -18,6 +18,7 @@
     <string name="endDateEx">End Date:  06-30-2018</string>
     <string name="deleteCourse">Delete Course</string>
     <string name="courseName">Course Name</string>
+    <string name="addMentor">Add Mentor</string>
 
 
 </resources>
