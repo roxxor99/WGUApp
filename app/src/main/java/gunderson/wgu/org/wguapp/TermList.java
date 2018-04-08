@@ -12,7 +12,7 @@ public class TermList extends AppCompatActivity {
 
     // need to add array and adapter info https://www.youtube.com/watch?v=ws_p8LJ4Uq8
     public void addTerms() {
-        btnAddTerm = (Button) findViewById(R.id.btnAddMen);
+        btnAddTerm = (Button) findViewById(R.id.btnAddTerm);
         btnAddTerm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
