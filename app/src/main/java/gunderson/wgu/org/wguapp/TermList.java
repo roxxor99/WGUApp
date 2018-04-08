@@ -16,7 +16,7 @@ public class TermList extends AppCompatActivity {
         btnAddTerm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addTerm = new Intent(TermList.this, AddTerms.class);
+                Intent addTerm = new Intent(TermList.this, TermDetails.class);
                 startActivity(addTerm);
             }
         });

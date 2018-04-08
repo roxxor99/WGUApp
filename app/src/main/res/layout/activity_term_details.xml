@@ -4,15 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".AddTerms">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".TermDetails">
 
 
     <EditText
-        android:id="@+id/ptAddTermsName"
+        android:id="@+id/ptTermDetailsName"
         android:layout_width="351dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/ptAddTermsStart"
+        android:id="@+id/ptTermDetailsStart"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -41,10 +41,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsName" />
+        app:layout_constraintTop_toBottomOf="@+id/ptTermDetailsName" />
 
     <EditText
-        android:id="@+id/ptAddTermsEnd"
+        android:id="@+id/ptTermDetailsEnd"
         android:layout_width="349dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -57,10 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsStart" />
+        app:layout_constraintTop_toBottomOf="@+id/ptTermDetailsStart" />
 
     <Button
-        android:id="@+id/btnAddTermsAddCourses"
+        android:id="@+id/btnTermDetailsAdd"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -79,7 +79,7 @@
         android:layout_marginStart="18dp" />
 
     <Button
-        android:id="@+id/btnAddTermsDeleteTerm"
+        android:id="@+id/btnTermDetailsDelete"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
