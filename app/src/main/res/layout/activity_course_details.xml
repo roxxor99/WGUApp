@@ -51,11 +51,10 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:ems="10"
-                    android:hint="Start Date:  01-01-2018"
+                    android:hint="@string/startDateEx"
                     android:inputType="date"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +71,7 @@
                     android:layout_marginRight="0dp"
                     android:layout_marginStart="250dp"
                     android:layout_marginTop="0dp"
-                    android:text="Alert"
+                    android:text="@string/alert"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.972"
@@ -88,7 +87,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:ems="10"
-                    android:hint="End Date:  01-30-2018"
+                    android:hint="@string/endDateEx"
                     android:inputType="date"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +104,7 @@
                     android:layout_marginRight="0dp"
                     android:layout_marginStart="250dp"
                     android:layout_marginTop="0dp"
-                    android:text="Alert"
+                    android:text="@string/alert"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.972"
@@ -142,7 +141,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Notes" />
+                    android:text="@string/notes" />
 
                 <Button
                     android:id="@+id/btnCourseDetailManageAss"
@@ -151,7 +150,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Manage Assesments"
+                    android:text="@string/manageAssessments"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/spinnerCourseDetailStatus" />
@@ -178,7 +177,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Manage Mentors" />
+                    android:text="@string/manageMentors" />
 
                 <ListView
                     android:id="@+id/lvCourseDetailManageMen"

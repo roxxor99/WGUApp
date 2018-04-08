@@ -5,22 +5,28 @@
     <string name="landing_courses">Courses</string>
     <string name="landing_mentors">Mentors</string>
 
-    <string name="button_add_term">Add Term</string>
-    <string name="button_delete_term">Delete Term</string>
-    <string name="start_date">Start Date</string>
-    <string name="end_date">End Date</string>
+    <string name="addTerm">Add Term</string>
+    <string name="deleteTerm">Delete Term</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDate">End Date</string>
     <string name="name">Name</string>
     <string name="termName">Term Name</string>
     <string name="addCourses">Add Courses</string>
-    <string name="deleteTerm">Delete Term</string>
-    <string name="addTerms">Add Term</string>
-    <string name="startDateEx">Start Date:  01-01-2018</string>
-    <string name="endDateEx">End Date:  06-30-2018</string>
+    <string name="startDateEx">Start Date:  01&#8211;01&#8211;2018</string>
+    <string name="endDateEx">End Date:  06&#8211;30&#8211;2018</string>
     <string name="deleteCourse">Delete Course</string>
     <string name="courseName">Course Name</string>
     <string name="addMentor">Add Mentor</string>
     <string name="assessmentName">Assessment Name</string>
-    <string name="notesName">Notes Name</string>
+    <string name="notesName">Title</string>
+    <string name="goalDate">Goal Date: 01&#8211;01&#8211;2018</string>
+    <string name="alert">Alert</string>
+    <string name="add">ADD</string>
+    <string name="delete">DELETE</string>
+    <string name="notes">Notes</string>
+    <string name="manageAssessments">Manage Assessments</string>
+    <string name="manageMentors">Manage Mentors</string>
 
 
 </resources>
+
