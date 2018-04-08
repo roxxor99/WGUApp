@@ -18,8 +18,8 @@ public class CourseDetails extends AppCompatActivity {
     }
 
     public void defineButtons(){
-//        findViewById(R.id.btnCourseDetailNotes).setOnClickListener(buttonClickListener);
-//        findViewById(R.id.btnCourseDetailManageAss).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnCourseDetailNotes).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnCourseDetailManageAss).setOnClickListener(buttonClickListener);
         findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
 //        findViewById(R.id.btnCourseDetailDeleteCourse).setOnClickListener(buttonClickListener);
     }
@@ -28,14 +28,14 @@ public class CourseDetails extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-//                case R.id.btnCourseDetailNotes:
-//                    Intent openNotes = new Intent(CourseDetails.this, Notes.class);
-//                    startActivity(openNotes);
-//                    break;
-//                case R.id.btnCourseDetailManageAss:
-//                    Intent openAssessment = new Intent(CourseDetails.this, AssessmentList.class);
-//                    startActivity(openAssessment);
-//                    break;
+                case R.id.btnCourseDetailNotes:
+                    Intent openNotes = new Intent(CourseDetails.this, Notes.class);
+                    startActivity(openNotes);
+                    break;
+                case R.id.btnCourseDetailManageAss:
+                    Intent openAssessment = new Intent(CourseDetails.this, AssessmentDetails.class);
+                    startActivity(openAssessment);
+                    break;
                 case R.id.ptCourseDetailManageMen:
                     Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
                     startActivity(openMentors);

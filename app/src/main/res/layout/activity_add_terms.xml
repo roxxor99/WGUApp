@@ -12,7 +12,7 @@
 
 
     <EditText
-        android:id="@+id/ptAddTermsTermName"
+        android:id="@+id/ptAddTermsName"
         android:layout_width="351dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/ptAddTermsStartDate"
+        android:id="@+id/ptAddTermsStart"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -41,14 +41,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsTermName" />
+        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsName" />
 
     <EditText
-        android:id="@+id/ptAddTermsEndDate"
+        android:id="@+id/ptAddTermsEnd"
         android:layout_width="349dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ptAddTermsStartDate"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="123dp"
         android:ems="10"
         android:hint="@string/endDateEx"
         android:inputType="date"
@@ -56,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsStartDate" />
+        app:layout_constraintTop_toBottomOf="@+id/ptAddTermsStart" />
 
     <Button
         android:id="@+id/btnAddTermsAddCourses"

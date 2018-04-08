@@ -19,6 +19,8 @@
     <string name="deleteCourse">Delete Course</string>
     <string name="courseName">Course Name</string>
     <string name="addMentor">Add Mentor</string>
+    <string name="assessmentName">Assessment Name</string>
+    <string name="notesName">Notes Name</string>
 
 
 </resources>

@@ -21,7 +21,10 @@
         <activity android:name=".CourseList" />
         <activity android:name=".CourseDetails" />
         <activity android:name=".MentorDetails" />
-        <activity android:name=".MentorList"></activity>
+        <activity android:name=".MentorList" />
+        <activity android:name=".AssessmentDetails" />
+        <activity android:name=".Notes" />
+        <activity android:name=".ShareNotes"></activity>
     </application>
 
 </manifest>
