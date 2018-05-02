@@ -8,202 +8,191 @@
     tools:context=".CourseDetails">
 
 
-        <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fillViewport="true"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/ptCourseDetailCourseName"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/courseName"
+                android:inputType="text"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/ptCourseDetailStartDate"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/startDateEx"
+                android:inputType="date"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.052"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+            <Switch
+                android:id="@+id/ptCourseDetailStartAlert"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="0dp"
+                android:text="@string/alert"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.972"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate"
+                tools:checked="false" />
+
+            <EditText
+                android:id="@+id/ptCourseDetailEndDate"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/endDateEx"
+                android:inputType="date"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.052"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailStartDate" />
+
+            <Switch
+                android:id="@+id/ptCourseDetailEndAlert"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="0dp"
+                android:text="@string/alert"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.972"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailStartAlert"
+                tools:ignore="RtlCompat" />
+
+            <Spinner
+                android:id="@+id/spinnerCourseDetailStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate" />
 
-                <EditText
-                    android:id="@+id/ptCourseDetailCourseName"
-                    android:layout_width="351dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:hint="@string/courseName"
-                    android:inputType="text"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/btnCourseDetailNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/notes" />
 
-                <EditText
-                    android:id="@+id/ptCourseDetailStartDate"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:hint="@string/startDateEx"
-                    android:inputType="date"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.052"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText5" />
+            <Button
+                android:id="@+id/btnCourseDetailManageAss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/manageAssessments"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCourseDetailStatus" />
 
-                <Switch
-                    android:id="@+id/ptCourseDetailStartAlert"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginTop="0dp"
-                    android:text="@string/alert"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.972"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate"
-                    tools:checked="false" />
+            <ListView
+                android:id="@+id/lvCourseDetailManageAss"
+                android:layout_width="match_parent"
+                android:layout_height="184dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnCourseDetailManageAss">
 
-                <EditText
-                    android:id="@+id/ptCourseDetailEndDate"
-                    android:layout_width="349dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:hint="@string/endDateEx"
-                    android:inputType="date"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.052"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailStartDate" />
+            </ListView>
 
-                <Switch
-                    android:id="@+id/ptCourseDetailEndAlert"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginTop="0dp"
-                    android:text="@string/alert"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.972"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailStartAlert"
-                    tools:ignore="RtlCompat" />
+            <Button
+                android:id="@+id/ptCourseDetailManageMen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/manageMentors" />
 
-                <Spinner
-                    android:id="@+id/spinnerCourseDetailTermGrp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate" />
+            <ListView
+                android:id="@+id/lvCourseDetailManageMen"
+                android:layout_width="match_parent"
+                android:layout_height="184dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <Spinner
-                    android:id="@+id/spinnerCourseDetailStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate" />
-
-                <Button
-                    android:id="@+id/btnCourseDetailNotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/notes" />
-
-                <Button
-                    android:id="@+id/btnCourseDetailManageAss"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/manageAssessments"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinnerCourseDetailStatus" />
-
-                <ListView
-                    android:id="@+id/lvCourseDetailManageAss"
-                    android:layout_width="match_parent"
-                    android:layout_height="184dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnCourseDetailManageAss">
-
-                </ListView>
-
-                <Button
-                    android:id="@+id/ptCourseDetailManageMen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/manageMentors" />
-
-                <ListView
-                    android:id="@+id/lvCourseDetailManageMen"
-                    android:layout_width="match_parent"
-                    android:layout_height="184dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/btnCourseDetailDelete"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/deleteCourse"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="12sp" />
+            <Button
+                android:id="@+id/btnCourseDetailDelete"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/deleteCourse"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
 
 
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

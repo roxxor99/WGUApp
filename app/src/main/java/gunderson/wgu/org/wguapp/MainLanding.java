@@ -18,6 +18,7 @@ public class MainLanding extends AppCompatActivity {
     public void defineButtons(){
         findViewById(R.id.btnTerms).setOnClickListener(buttonClickListener);
         findViewById(R.id.btnCourses).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnAssessment).setOnClickListener(buttonClickListener);
         findViewById(R.id.btnMentors).setOnClickListener(buttonClickListener);
     }
         //This defines the actions for the buttons.
@@ -33,11 +34,14 @@ public class MainLanding extends AppCompatActivity {
                     Intent openCourses = new Intent(MainLanding.this, CourseList.class);
                     startActivity(openCourses);
                     break;
+                case R.id.btnAssessment:
+                    Intent openAssessments = new Intent(MainLanding.this, AssessmentList.class);
+                    startActivity(openAssessments);
+                    break;
                 case R.id.btnMentors:
                     Intent openMentors = new Intent(MainLanding.this, MentorList.class);
                     startActivity(openMentors);
                     break;
-
 
             }
         }

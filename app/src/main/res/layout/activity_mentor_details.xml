@@ -1,75 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MentorDetails">
 
     <EditText
         android:id="@+id/ptMentorDetailName"
-        android:layout_width="351dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="53dp"
         android:ems="10"
-        android:hint="Mentors Name"
+        android:hint="@string/mentorName"
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
     <EditText
         android:id="@+id/ptMentorDetailPhone"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="1-800-227-1000"
+        android:hint="@string/mentorPhoneEx"
         android:inputType="phone"
         android:textAlignment="center" />
 
     <EditText
         android:id="@+id/ptMentorDetailEmail"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="email@wgu.edu"
+        android:hint="@string/mentorEmailEx"
         android:inputType="textEmailAddress"
         android:textAlignment="center" />
 
-    <Spinner
-        android:id="@+id/spinnerMentorDetailCourse"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="221dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnMentorDetailDelete"
-        android:layout_width="150dp"
-        android:layout_height="36dp"
-        android:layout_alignEnd="@+id/ptMentorDetailName"
-        android:layout_alignTop="@+id/btnMentorDetailSave"
-        android:text="DELETE"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnMentorDetailSave"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:text="@string/add"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/btnMentorDetailSave"
-        android:layout_width="150dp"
-        android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/ptMentorDetailName"
-        android:layout_marginBottom="210dp"
-        android:text="ADD"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnMentorDetailDelete"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:text="@string/delete"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp" />
+    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

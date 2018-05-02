@@ -24,7 +24,10 @@
         <activity android:name=".AssessmentDetails" />
         <activity android:name=".Notes" />
         <activity android:name=".ShareNotes" />
-        <activity android:name=".TermDetails"></activity>
+        <activity android:name=".TermDetails" />
+        <activity android:name=".NotesList" />
+        <!--<activity android:name=".assessment_list" />-->
+        <activity android:name=".AssessmentList"></activity>
     </application>
 
 </manifest>

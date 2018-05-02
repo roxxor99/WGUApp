@@ -1,31 +1,56 @@
 <resources>
     <string name="app_name">WGU App</string>
-    <string name="title_activity_term_list">TermList</string>
+
+    <!--main_landing-->
     <string name="landing_terms">Terms</string>
     <string name="landing_courses">Courses</string>
     <string name="landing_mentors">Mentors</string>
+    <string name="landing_assessments">Assessments</string>
 
+    <!--term_list-->
     <string name="addTerm">Add Term</string>
     <string name="deleteTerm">Delete Term</string>
-    <string name="startDate">Start Date</string>
-    <string name="endDate">End Date</string>
+
+    <!--term_details-->
     <string name="name">Name</string>
     <string name="termName">Term Name</string>
+
+    <!--course_list-->
     <string name="addCourses">Add Courses</string>
+
+    <!--course_details-->
     <string name="startDateEx">Start Date:  01&#8211;01&#8211;2018</string>
     <string name="endDateEx">End Date:  06&#8211;30&#8211;2018</string>
     <string name="deleteCourse">Delete Course</string>
     <string name="courseName">Course Name</string>
-    <string name="addMentor">Add Mentor</string>
-    <string name="assessmentName">Assessment Name</string>
-    <string name="notesName">Title</string>
-    <string name="goalDate">Goal Date: 01&#8211;01&#8211;2018</string>
-    <string name="alert">Alert</string>
-    <string name="add">ADD</string>
-    <string name="delete">DELETE</string>
-    <string name="notes">Notes</string>
     <string name="manageAssessments">Manage Assessments</string>
     <string name="manageMentors">Manage Mentors</string>
+    <string name="notes">Notes</string>
+    <string name="alert">Alert</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+
+    <!--mentor_list-->
+    <string name="addMentor">Add Mentor</string>
+
+    <!--notes-->
+    <string name="notesName">Title</string>
+    <string name="information">Information</string>
+
+    <!--notes_list-->
+    <string name="addNotes">Add Notes</string>
+
+    <!--assessment_list-->
+    <string name="addAssessment">Add Assessment</string>
+
+    <!--assessment_details-->
+    <string name="assessmentName">Assessment Name</string>
+    <string name="goalDate">Goal Date: 01&#8211;01&#8211;2018</string>
+
+    <!--mentor_details-->
+    <string name="mentorName">Mentor Name</string>
+    <string name="mentorPhoneEx">1-800-227-1000</string>
+    <string name="mentorEmailEx">email@wgu.edu</string>
 
 
 </resources>
