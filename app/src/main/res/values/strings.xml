@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WGU App</string>
+    <string name="app_name">WGU Student Scheduler</string>
 
     <!--main_landing-->
     <string name="landing_terms">Terms</string>
