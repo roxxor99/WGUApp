@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TermList extends ListActivity {
     public Button btnAddTerm;
-////JG
+    ////JG
     private DBCon datasource;
     public EditText termNameEditText;
     public TextView termStartTextView;
@@ -23,10 +23,24 @@ public class TermList extends ListActivity {
 ////JG
 
     public void addTerm() {
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+
+        String termName = extras.getString("TermName");
+        String termStart = extras.getString("TermStart");
+        String termEnd = extras.getString("TermEnd");
+
+        TermModel term = new TermModel();
+        term.setTermName(termName);
+        term.setTermStart(termStart);
+        term.setTermStart(termEnd);
+        datasource.createTerm(term);
+        }
+
 //    //JG
-        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
-        termStartTextView = (TextView) findViewById(R.id.tvTermDetailsStart);
-        termEndTextView = (TextView) findViewById(R.id.tvTermDetailsEnd);
+//        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
+//        termStartTextView = (TextView) findViewById(R.id.tvTermDetailsStart);
+//        termEndTextView = (TextView) findViewById(R.id.tvTermDetailsEnd);
 //    //JG
 
         btnAddTerm = (Button) findViewById(R.id.btnAddTerm);
@@ -54,7 +68,7 @@ public class TermList extends ListActivity {
         //calls the method to screen change
         addTerm();
 
-    //JG
+        //JG
         datasource = new DBCon(this);
         datasource.open();
         List<TermModel> values = datasource.getAllTerms();
@@ -63,7 +77,7 @@ public class TermList extends ListActivity {
     }
 
     public void onClick(View view) {
-        Intent intent = new  Intent(TermList.this, TermList.class);
+        Intent intent = new Intent(TermList.this, TermList.class);
 
         ArrayAdapter<TermModel> adapter = (ArrayAdapter<TermModel>) getListAdapter();
         TermModel term = null;
@@ -84,15 +98,6 @@ public class TermList extends ListActivity {
     }
 //
 }
-
-
-
-
-
-
-
-
-
 
 
 //SQLite example code

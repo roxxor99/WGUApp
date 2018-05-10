@@ -75,7 +75,7 @@ public class TermDetails extends AppCompatActivity {
                         TermDetails.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mStartDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -94,7 +94,7 @@ public class TermDetails extends AppCompatActivity {
                         TermDetails.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mEndDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -141,6 +141,18 @@ public class TermDetails extends AppCompatActivity {
             startActivity(new Intent(this, MainLanding.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
+        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
+        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
+        Intent i = new Intent(this, TermList.class);
+        i.putExtra("TermName", termNameEditText.getText().toString());
+        i.putExtra("TermStart", mTermStartDate.getText().toString());
+        i.putExtra("TermEnd", mTermEndDate.getText().toString());
+        startActivity(i);
     }
 
     //save on back button
