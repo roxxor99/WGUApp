@@ -8,24 +8,26 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.List;
 
 
 public class TermList extends ListActivity {
     public Button btnAddTerm;
-//JG
+////JG
     private DBCon datasource;
     public EditText termNameEditText;
-    public EditText termStartEditText;
-    public EditText termEndEditText;
-//JG
+    public TextView termStartTextView;
+    public TextView termEndTextView;
+////JG
 
     public void addTerm() {
-    //JG
+//    //JG
         termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
-        termStartEditText = (EditText) findViewById(R.id.ptTermDetailsStart);
-        termEndEditText = (EditText) findViewById(R.id.ptTermDetailsEnd);
-    //JG
+        termStartTextView = (TextView) findViewById(R.id.tvTermDetailsStart);
+        termEndTextView = (TextView) findViewById(R.id.tvTermDetailsEnd);
+//    //JG
 
         btnAddTerm = (Button) findViewById(R.id.btnAddTerm);
         btnAddTerm.setOnClickListener(new View.OnClickListener() {
@@ -33,12 +35,12 @@ public class TermList extends ListActivity {
             @Override
             public void onClick(View view) {
                 Intent addTerm = new Intent(TermList.this, TermDetails.class);
-        //JG
-                Bundle extras = addTerm.getExtras();
-                extras.putString("TermName", termNameEditText.getText().toString());
-                extras.putString("TermStart", termStartEditText.getText().toString());
-                extras.putString("TermEnd", termEndEditText.getText().toString());
-        //JG
+//        //JG
+//                Bundle extras = addTerm.getExtras();
+//                extras.putString("TermName", termNameEditText.getText().toString());
+//                extras.putString("TermStart", termStartTextView.getText().toString());
+//                extras.putString("TermEnd", termEndTextView.getText().toString());
+//        //JG
                 startActivity(addTerm);
             }
         });
@@ -80,8 +82,16 @@ public class TermList extends ListActivity {
         datasource.close();
         super.onPause();
     }
-
+//
 }
+
+
+
+
+
+
+
+
 
 
 

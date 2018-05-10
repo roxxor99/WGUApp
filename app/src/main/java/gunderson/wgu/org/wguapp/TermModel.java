@@ -68,7 +68,6 @@ public class TermModel {
     }
 
 
-    //Don't need... Should only need: Exception check on if a term has an appointment before deleting of a term is allowed.
     //Ensure Term data is not null
     public boolean isValid() {
         if (termName.isEmpty() || termStart.isEmpty() || termEnd.isEmpty()) {
@@ -78,6 +77,7 @@ public class TermModel {
             //convert start and end pattern into the supported format
             Date startDate = dtf.parse(termStart);
             Date endDate = dtf.parse(termEnd);
+            //Check if end is before start
             if (!startDate.before(endDate)) {
                 return false;
             }

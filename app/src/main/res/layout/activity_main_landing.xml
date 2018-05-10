@@ -36,42 +36,4 @@
         android:background="@color/colorAccent"
         android:text="@string/landing_terms" />
 
-    <Button
-        android:id="@+id/btnCourses"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/colorAccent"
-        android:text="@string/landing_courses" />
-
-    <Button
-        android:id="@+id/btnAssessment"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/colorAccent"
-        android:text="@string/landing_assessments" />
-
-    <Button
-        android:id="@+id/btnMentors"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/colorAccent"
-        android:text="@string/landing_mentors" />
 </LinearLayout>

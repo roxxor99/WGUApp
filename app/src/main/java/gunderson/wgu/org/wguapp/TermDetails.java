@@ -1,40 +1,51 @@
 package gunderson.wgu.org.wguapp;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class TermDetails extends AppCompatActivity {
     public Button btnTermDetailsAddCourse;
     public EditText termNameEditText;
-    public EditText termStartEditText;
-    public EditText termEndEditText;
 
+    //DatePicker
+    private TextView mTermStartDate;
+    private TextView mTermEndDate;
+    private DatePickerDialog.OnDateSetListener mStartDateSetListener;
+    private DatePickerDialog.OnDateSetListener mEndDateSetListener;
+
+    private static final String TAG = "TermDetails";
 
     public void addCourse() {
-//!!!!!!!!Should this be down on onCreate
-        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
-        termStartEditText = (EditText) findViewById(R.id.ptTermDetailsStart);
-        termEndEditText = (EditText) findViewById(R.id.ptTermDetailsEnd);
+//?!
+//        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
+//        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
+//        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
 
         btnTermDetailsAddCourse = (Button) findViewById(R.id.btnTermDetailsAddCourse);
         btnTermDetailsAddCourse.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                //TODO:
-                //only enabled adding courses if TermId is present
                 Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
-                Bundle extras = addCourse.getExtras();
-                extras.putString("TermName",termNameEditText.getText().toString());
-                extras.putString("TermStart",termStartEditText.getText().toString());
-                extras.putString("TermEnd",termEndEditText.getText().toString());
+//                Bundle extras = addCourse.getExtras();
+//                extras.putString("TermName",termNameEditText.getText().toString());
+//                extras.putString("TermStart",mTermStartDate.getText().toString());
+//                extras.putString("TermEnd",mTermEndDate.getText().toString());
 
                 startActivity(addCourse);
             }
@@ -48,53 +59,68 @@ public class TermDetails extends AppCompatActivity {
         setContentView(R.layout.activity_term_details);
         addCourse();
 
-//        //open DataSource
-//        datasource = new DBCon(this);
-//        datasource.open();
-//
-//        List<TermModel> values = datasource.getAllTerms();
-//        ArrayAdapter<TermModel> adapter = new ArrayAdapter<TermModel>(this, android.R.layout.simple_list_item_1, values);
-//        setListAdapter(adapter);
+        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
+        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
+
+        mTermStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //get today's date
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        TermDetails.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mStartDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mTermEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //get today's date
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        TermDetails.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mEndDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mStartDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+                String date = month + "/" + day + "/" + year;
+                mTermStartDate.setText(date);
+            }
+        };
+
+        mEndDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                //January = 0 need to add 1 to get correct month
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+                String date = month + "/" + day + "/" + year;
+                mTermEndDate.setText(date);
+            }
+        };
     }
-
-//    public void onClick(View view) {
-//        Intent intent = new  Intent(TermDetails.this, TermList.class);
-//
-//        ArrayAdapter<TermModel> adapter = (ArrayAdapter<TermModel>) getListAdapter();
-//        TermModel term = null;
-//        switch (view.getId()) {
-////            case R.id.add:
-////                String[] comments = new String[]{"Happy", "Sad", "Mad"};
-////                int nextInt = new Random().nextInt(3);
-////                // save the new comment to the database
-////                term = datasource.createTerm(term[nextInt]);
-////                adapter.add(term);
-////                break;
-//
-//
-//            case R.id.menuDelete:
-//                if (getListAdapter().getCount() > 0) {
-//                    term = (TermModel) getListAdapter().getItem(0);
-//                    datasource.deleteTerm(term);
-//                    adapter.remove(term);
-//                }
-//                break;
-//        }
-//        adapter.notifyDataSetChanged();
-//    }
-
-//    @Override
-//    protected void onResume() {
-//        datasource.open();
-//        super.onResume();
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        datasource.close();
-//        super.onPause();
-//    }
-
 
     //Menu
     @Override
@@ -116,4 +142,18 @@ public class TermDetails extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    //save on back button
+//    @Override
+//    public void onSaveInstanceState(Bundle extras) {
+//        super.onSaveInstanceState(extras);
+//        // Save UI state changes to the savedInstanceState.
+//        // This bundle will be passed to onCreate if the process is
+//        // killed and restarted.
+////        Bundle extras = onSaveInstanceState.getExtras();
+//                extras.putString("TermName",termNameEditText.getText().toString());
+//                extras.putString("TermStart",mTermStartDate.getText().toString());
+//                extras.putString("TermEnd",mTermEndDate.getText().toString());
+//    }
+
 }

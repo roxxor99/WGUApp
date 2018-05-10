@@ -19,8 +19,8 @@
     <string name="addCourses">Add Courses</string>
 
     <!--course_details-->
-    <string name="startDateEx">Start Date:  01&#8211;01&#8211;2018</string>
-    <string name="endDateEx">End Date:  06&#8211;30&#8211;2018</string>
+    <string name="startDateEx">Start Date</string>
+    <string name="endDateEx">End Date</string>
     <string name="deleteCourse">Delete Course</string>
     <string name="courseName">Course Name</string>
     <string name="manageAssessments">Manage Assessments</string>
@@ -45,7 +45,7 @@
 
     <!--assessment_details-->
     <string name="assessmentName">Assessment Name</string>
-    <string name="goalDate">Goal Date: 01&#8211;01&#8211;2018</string>
+    <string name="goalDate">Goal Date</string>
 
     <!--mentor_details-->
     <string name="mentorName">Mentor Name</string>
