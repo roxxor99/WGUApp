@@ -136,6 +136,7 @@ public class TermDetails extends AppCompatActivity {
 
         //TODO:
         //need an exception on delete that checks for associated courseId and denys delete if present.
+        //delete term
         if (id == R.id.menuDelete) {
             Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainLanding.class));
@@ -153,6 +154,7 @@ public class TermDetails extends AppCompatActivity {
         termNameEditText = findViewById(R.id.ptTermDetailsName);
         mTermStartDate = findViewById(R.id.tvTermDetailsStart);
         mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
+
         Intent i = new Intent(this, TermList.class);
         //need if statement to check for empty data
         i.putExtra("TermName", termNameEditText.getText().toString());
@@ -175,7 +177,6 @@ public class TermDetails extends AppCompatActivity {
 //        term.setTermName(termName);
 //        term.setTermStart(termStart);
 //        term.setTermStart(termEnd);
-//
 //
 //        btnTermDetailsSave = findViewById(R.id.btnTermDetailsSave);
 //        btnTermDetailsSave.setOnClickListener(new View.OnClickListener() {

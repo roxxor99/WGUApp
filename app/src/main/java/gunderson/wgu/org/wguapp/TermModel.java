@@ -22,7 +22,7 @@ public class TermModel {
 
     }
 
-    //example shows this is needed for the ArrayAdapter in the ListView
+    //TermListView display
     @Override
     public String toString() {
         return "Term Name: " + termName + "\n Start: " + termStart + "\n End: " + termEnd;

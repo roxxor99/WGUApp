@@ -22,11 +22,11 @@ public class TermList extends ListActivity {
     public Button btnAddTerm;
     private DBCon datasource;
 
-    DatabaseHelper mDatabaseHelper;
+//    DatabaseHelper mDatabaseHelper;
 
-    public EditText termNameEditText;
-    public TextView termStartTextView;
-    public TextView termEndTextView;
+//    public EditText termNameEditText;
+//    public TextView termStartTextView;
+//    public TextView termEndTextView;
 
 
     public void addTerm() {
@@ -95,7 +95,7 @@ public class TermList extends ListActivity {
     public void onClick(View view) {
 //        Intent intent = new Intent(TermList.this, TermDetails.class);
         ArrayAdapter<TermModel> adapter = (ArrayAdapter<TermModel>) getListAdapter();
-        TermModel term = null;
+//        TermModel term = null;
 
         adapter.notifyDataSetChanged();
     }
