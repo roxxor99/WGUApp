@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".MentorDetails">
 
+    <Button
+        android:id="@+id/btnMentorSave"
+        style="@android:style/Widget.DeviceDefault.Button"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="16dp"
+        android:onClick="saveMentor"
+        android:text="@string/save"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12sp" />
+
     <EditText
         android:id="@+id/ptMentorDetailName"
         android:layout_width="match_parent"
@@ -42,33 +55,5 @@
         android:hint="@string/mentorEmailEx"
         android:inputType="textEmailAddress"
         android:textAlignment="center" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnMentorDetailSave"
-            android:layout_width="36dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="@string/add"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnMentorDetailDelete"
-            android:layout_width="36dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="@string/delete"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="12sp" />
-    </LinearLayout>
 
 </LinearLayout>

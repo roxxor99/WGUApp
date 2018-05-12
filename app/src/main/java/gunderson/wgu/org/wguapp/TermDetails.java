@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class TermDetails extends AppCompatActivity {
+    private DBCon datasource;
+    public Button btnTermDetailsSave;
     public Button btnTermDetailsAddCourse;
     public EditText termNameEditText;
 
@@ -31,7 +33,7 @@ public class TermDetails extends AppCompatActivity {
     private static final String TAG = "TermDetails";
 
     public void addCourse() {
-//?!
+
 //        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
 //        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
 //        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
@@ -51,7 +53,6 @@ public class TermDetails extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,6 @@ public class TermDetails extends AppCompatActivity {
 
         mTermEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            //get today's date
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
@@ -143,29 +143,52 @@ public class TermDetails extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onBackPressed() {
-        termNameEditText = (EditText) findViewById(R.id.ptTermDetailsName);
-        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
-        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
+        super.onBackPressed();
+        //Term Model method to check if null values and dtf/start before end
+        //isValid;
+
+        termNameEditText = findViewById(R.id.ptTermDetailsName);
+        mTermStartDate = findViewById(R.id.tvTermDetailsStart);
+        mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
         Intent i = new Intent(this, TermList.class);
+        //need if statement to check for empty data
         i.putExtra("TermName", termNameEditText.getText().toString());
         i.putExtra("TermStart", mTermStartDate.getText().toString());
         i.putExtra("TermEnd", mTermEndDate.getText().toString());
         startActivity(i);
     }
 
-    //save on back button
-//    @Override
-//    public void onSaveInstanceState(Bundle extras) {
-//        super.onSaveInstanceState(extras);
-//        // Save UI state changes to the savedInstanceState.
-//        // This bundle will be passed to onCreate if the process is
-//        // killed and restarted.
-////        Bundle extras = onSaveInstanceState.getExtras();
-//                extras.putString("TermName",termNameEditText.getText().toString());
-//                extras.putString("TermStart",mTermStartDate.getText().toString());
-//                extras.putString("TermEnd",mTermEndDate.getText().toString());
-//    }
 
+//    public void saveTerm() {
+//        termNameEditText = findViewById(R.id.ptTermDetailsName);
+//        mTermStartDate = findViewById(R.id.tvTermDetailsStart);
+//        mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
+//
+//        String termName = termNameEditText.getText().toString();
+//        String termStart = mTermStartDate.getText().toString();
+//        String termEnd = mTermEndDate.getText().toString();
+//
+//        final TermModel term = new TermModel();
+//        term.setTermName(termName);
+//        term.setTermStart(termStart);
+//        term.setTermStart(termEnd);
+//
+//
+//        btnTermDetailsSave = findViewById(R.id.btnTermDetailsSave);
+//        btnTermDetailsSave.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                Intent saveTerm = new Intent(TermDetails.this, TermList.class);
+//                datasource = new DBCon(this);
+//                datasource.open();
+//                datasource.createTerm(term);
+//                datasource.close();
+//                startActivity(saveTerm);
+//            }
+//        });
+//    }
 }
