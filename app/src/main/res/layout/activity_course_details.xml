@@ -136,15 +136,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate" />
 
             <Button
-                android:id="@+id/btnCourseDetailNotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/notes" />
-
-            <Button
                 android:id="@+id/btnCourseDetailManageAss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +150,7 @@
             <ListView
                 android:id="@+id/lvCourseDetailManageAss"
                 android:layout_width="match_parent"
-                android:layout_height="184dp"
+                android:layout_height="130dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -183,7 +174,7 @@
             <ListView
                 android:id="@+id/lvCourseDetailManageMen"
                 android:layout_width="match_parent"
-                android:layout_height="184dp"
+                android:layout_height="121dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -191,6 +182,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btnCourseDetailNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/notes" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

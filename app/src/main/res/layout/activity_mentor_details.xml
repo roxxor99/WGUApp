@@ -7,53 +7,103 @@
     android:orientation="vertical"
     tools:context=".MentorDetails">
 
-    <Button
-        android:id="@+id/btnMentorSave"
-        style="@android:style/Widget.DeviceDefault.Button"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="16dp"
-        android:onClick="saveMentor"
-        android:text="@string/save"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="12sp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <EditText
-        android:id="@+id/ptMentorDetailName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="53dp"
-        android:ems="10"
-        android:hint="@string/mentorName"
-        android:inputType="textPersonName"
-        android:textAlignment="center" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/ptMentorDetailPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="@string/mentorPhoneEx"
-        android:inputType="phone"
-        android:textAlignment="center" />
+            <Button
+                android:id="@+id/btnMentorSave"
+                style="@android:style/Widget.DeviceDefault.Button"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="16dp"
+                android:onClick="saveMentor"
+                android:text="@string/save"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp" />
 
-    <EditText
-        android:id="@+id/ptMentorDetailEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="@string/mentorEmailEx"
-        android:inputType="textEmailAddress"
-        android:textAlignment="center" />
+            <EditText
+                android:id="@+id/ptMentorDetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="53dp"
+                android:ems="10"
+                android:hint="@string/mentorName"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentorDetailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorPhoneEx"
+                android:inputType="phone"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentorDetailEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorEmailEx"
+                android:inputType="textEmailAddress"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentor2DetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="53dp"
+                android:ems="10"
+                android:hint="@string/mentorName"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentor2DetailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorPhoneEx"
+                android:inputType="phone"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentor2DetailEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorEmailEx"
+                android:inputType="textEmailAddress"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
 </LinearLayout>

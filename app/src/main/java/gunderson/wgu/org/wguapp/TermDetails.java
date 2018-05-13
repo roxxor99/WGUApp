@@ -38,7 +38,7 @@ public class TermDetails extends AppCompatActivity {
 //        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
 //        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
 
-        btnTermDetailsAddCourse = (Button) findViewById(R.id.btnTermDetailsAddCourse);
+        btnTermDetailsAddCourse = findViewById(R.id.btnTermDetailsAddCourse);
         btnTermDetailsAddCourse.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -60,8 +60,8 @@ public class TermDetails extends AppCompatActivity {
         setContentView(R.layout.activity_term_details);
         addCourse();
 
-        mTermStartDate = (TextView) findViewById(R.id.tvTermDetailsStart);
-        mTermEndDate = (TextView) findViewById(R.id.tvTermDetailsEnd);
+        mTermStartDate = findViewById(R.id.tvTermDetailsStart);
+        mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
 
         mTermStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
