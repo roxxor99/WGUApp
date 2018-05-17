@@ -19,10 +19,11 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class TermDetails extends AppCompatActivity {
-    private DBCon datasource;
+    //    private DBCon datasource;
     public Button btnTermDetailsSave;
     public Button btnTermDetailsAddCourse;
     public EditText termNameEditText;
+    private long termId;
 
     //DatePicker
     private TextView mTermStartDate;
@@ -60,8 +61,65 @@ public class TermDetails extends AppCompatActivity {
         setContentView(R.layout.activity_term_details);
         addCourse();
 
+        //variables for the controls
+        termNameEditText = findViewById(R.id.ptTermDetailsName);
         mTermStartDate = findViewById(R.id.tvTermDetailsStart);
         mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
+
+//        //if else to determine if termId is set (new/modify)
+//        //Add new
+//        if(termId == -1) {
+//
+//        }
+//
+//        //Modify existing
+//        else{
+//        }
+
+//        if (savedInstanceState != null) {
+            //Breaking the bundle into control information
+            termId = savedInstanceState.getLong("termId");
+            String termName = savedInstanceState.getString("termName");
+            String termStart = savedInstanceState.getString("termStart");
+            String termEnd = savedInstanceState.getString("termEnd");
+
+            //Assign to proper controls
+            termNameEditText.setText(termName);
+            mTermStartDate.setText(termStart);
+            mTermEndDate.setText(termEnd);
+
+
+            TermModel term = new TermModel();
+            term.setTermName(termName);
+            term.setTermStart(termStart);
+            term.setTermEnd(termEnd);
+
+            DBCon datasource = new DBCon(this);
+            datasource.open();
+            datasource.updateTerm(term);
+            datasource.close();
+
+//        }
+
+
+        //example from TermList
+//                Bundle savedInstanceState = getIntent().getExtras();
+//        if(savedInstanceState != null){
+//
+//        termName = savedInstanceState.getString("TermName");
+//        termStart = savedInstanceState.getString("TermStart");
+//        termEnd = savedInstanceState.getString("TermEnd");
+//
+//        TermModel term = new TermModel();
+//        term.setTermName(termName);
+//        term.setTermStart(termStart);
+//        term.setTermEnd(termEnd);
+//
+//        DBCon datasource = new DBCon(this);
+//        datasource.open();
+//        datasource.updateTerm(term);
+//        datasource.close();
+
 
         mTermStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,27 +199,52 @@ public class TermDetails extends AppCompatActivity {
             Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainLanding.class));
         }
+
+        if (id == R.id.btnTermDetailsSave) {
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
+    public void saveTerm(View view) {
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        //Term Model method to check if null values and dtf/start before end
-        //isValid;
+        String termName = termNameEditText.getText().toString();
+        String termStart = mTermStartDate.getText().toString();
+        String termEnd = mTermEndDate.getText().toString();
 
-        termNameEditText = findViewById(R.id.ptTermDetailsName);
-        mTermStartDate = findViewById(R.id.tvTermDetailsStart);
-        mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
+        final TermModel term = new TermModel();
+        term.setTermName(termName);
+        term.setTermStart(termStart);
+        term.setTermEnd(termEnd);
 
-        Intent i = new Intent(this, TermList.class);
-        //need if statement to check for empty data
-        i.putExtra("TermName", termNameEditText.getText().toString());
-        i.putExtra("TermStart", mTermStartDate.getText().toString());
-        i.putExtra("TermEnd", mTermEndDate.getText().toString());
-        startActivity(i);
+        DBCon datasource = new DBCon(this);
+        datasource.open();
+        datasource.createTerm(term);
+        datasource.close();
+
+        finish();
     }
+}
+
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        //Term Model method to check if null values and dtf/start before end
+//        //isValid;
+//
+//        termNameEditText = findViewById(R.id.ptTermDetailsName);
+//        mTermStartDate = findViewById(R.id.tvTermDetailsStart);
+//        mTermEndDate = findViewById(R.id.tvTermDetailsEnd);
+//
+//        Intent i = new Intent(this, TermList.class);
+//        //need if statement to check for empty data
+//        i.putExtra("TermName", termNameEditText.getText().toString());
+//        i.putExtra("TermStart", mTermStartDate.getText().toString());
+//        i.putExtra("TermEnd", mTermEndDate.getText().toString());
+//        startActivity(i);
+//    }
 
 
 //    public void saveTerm() {
@@ -192,4 +275,4 @@ public class TermDetails extends AppCompatActivity {
 //            }
 //        });
 //    }
-}
+//}
