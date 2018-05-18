@@ -1,4 +1,5 @@
 package gunderson.wgu.org.wguapp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class CourseModel {
 //        this.courseNotesText = courseNotesText;
 //    }
 
-    public CourseModel(){
+    public CourseModel() {
     }
 
     public long getCourseId() {
@@ -138,7 +139,7 @@ public class CourseModel {
         this.courseEnd = courseEnd;
     }
 
-    public void setCourseStatus(String  courseStatus) {
+    public void setCourseStatus(String courseStatus) {
         this.courseStatus = courseStatus;
     }
 

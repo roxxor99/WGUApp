@@ -3,10 +3,7 @@ package gunderson.wgu.org.wguapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 
@@ -26,13 +23,14 @@ public class MainLanding extends AppCompatActivity {
 
     }
 
-    public void defineButtons(){
+    public void defineButtons() {
         findViewById(R.id.btnTerms).setOnClickListener(buttonClickListener);
 //        findViewById(R.id.btnCourses).setOnClickListener(buttonClickListener);
 //        findViewById(R.id.btnAssessment).setOnClickListener(buttonClickListener);
 //        findViewById(R.id.btnMentors).setOnClickListener(buttonClickListener);
     }
-        //This defines the actions for the buttons.
+
+    //This defines the actions for the buttons.
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
 
         @Override

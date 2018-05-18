@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -18,36 +17,40 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 public class CourseDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private DBCon datasource;
-    Spinner detailSpinner;
-    ArrayAdapter<CharSequence> adapter;
+    private Spinner mStatusSpinner;
 
     //DatePicker
+    private TextView mCourseName;
     private TextView mCourseStartDate;
     private TextView mCourseEndDate;
     private DatePickerDialog.OnDateSetListener mStartDateSetListener;
     private DatePickerDialog.OnDateSetListener mEndDateSetListener;
-
+    private long termId;
     private static final String TAG = "CourseDetails";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            termId = extras.getLong("termId");
+        }
+
         defineButtons();
 
         //Spinner
-        detailSpinner = findViewById(R.id.spinnerCourseDetailStatus);
+        mStatusSpinner = findViewById(R.id.spinnerCourseDetailStatus);
+        ArrayAdapter<CharSequence> adapter;
         adapter = ArrayAdapter.createFromResource(this, R.array.course_detail, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        detailSpinner.setAdapter(adapter);
-        detailSpinner.setOnItemSelectedListener(this);
+        mStatusSpinner.setAdapter(adapter);
+        mStatusSpinner.setOnItemSelectedListener(this);
 
 
         mCourseStartDate = findViewById(R.id.tvCourseDetailStartDate);
@@ -132,8 +135,9 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         }
         return super.onOptionsItemSelected(item);
     }
+
     //button navigation
-    public void defineButtons(){
+    public void defineButtons() {
         findViewById(R.id.btnCourseDetailNotes).setOnClickListener(buttonClickListener);
         findViewById(R.id.btnCourseDetailManageAss).setOnClickListener(buttonClickListener);
         findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
@@ -168,11 +172,43 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         String sSelected = adapterView.getItemAtPosition(position).toString();
-//        Toast.makeText(this, sSelected, Toast.LENGTH_SHORT).show();
     }
+
     //Spinner
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+
+    public void saveCourse(View view) {
+
+        //Create variables
+        String courseName = mCourseName.getText().toString();
+        String courseStart = mCourseStartDate.getText().toString();
+        String courseEnd = mCourseEndDate.getText().toString();
+        String status = mStatusSpinner.getSelectedItem().toString();
+//        String status = mStatusSpinner.getText().toString();
+        //add spinner same as textedit
+
+        final CourseModel course = new CourseModel();
+        course.setCourseTermId(termId);
+        course.setCourseName(courseName);
+        course.setCourseStart(courseStart);
+        course.setCourseEnd(courseEnd);
+        //add spinner
+
+        DBCon datasource = new DBCon(this);
+        datasource.open();
+        Bundle extras = getIntent().getExtras();
+
+        if (extras == null) {
+            datasource.createCourse(course);
+        } else {
+            datasource.updateCourse(course);
+        }
+
+        datasource.close();
+        finish();
     }
 }

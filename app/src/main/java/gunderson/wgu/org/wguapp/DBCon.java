@@ -5,14 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //Datasource
 public class DBCon {
-
     private SQLiteOpenHelper dbHelper;
     private SQLiteDatabase db;
 
@@ -37,12 +35,8 @@ public class DBCon {
             DatabaseHelper.COURSE_MENTOR_PHONE_TWO,
             DatabaseHelper.COURSE_MENTOR_EMAIL_ONE,
             DatabaseHelper.COURSE_MENTOR_EMAIL_TWO,
-
-//May not need the following 2 notification lines:
-//Check on getters and setters
             DatabaseHelper.COURSE_NOTIFICATION_START,
             DatabaseHelper.COURSE_NOTIFICATION_END,
-
             DatabaseHelper.COURSE_NOTES_TITLE,
             DatabaseHelper.COURSE_NOTES_TEXT};
 
@@ -52,11 +46,7 @@ public class DBCon {
             DatabaseHelper.ASSESSMENT_COURSE_ID,
             DatabaseHelper.ASSESSMENT_NAME,
             DatabaseHelper.ASSESSMENT_TYPE,
-
-//May not need the notification line below need to check:
-//Check on getters and setters
             DatabaseHelper.ASSESSMENT_NOTIFICATION,
-
             DatabaseHelper.ASSESSMENT_GOAL_DATE};
 
     public DBCon(Context context) {
@@ -64,12 +54,10 @@ public class DBCon {
     }
 
     public void open() {
-//        Log.v(LOGTAG, "Database opened");
         db = dbHelper.getWritableDatabase();
     }
 
     public void close() {
-//        Log.v(LOGTAG, "Database closed");
         dbHelper.close();
     }
 
@@ -81,13 +69,6 @@ public class DBCon {
         long insertId = db.insert(DatabaseHelper.TABLE_TERMS, null, values);
         term.setTermId(insertId);
         return term;
-//        Cursor cursor = db.query(DatabaseHelper.TABLE_COMMENTS,
-//                allColumns, DatabaseHelper.COLUMN_ID + " = " + insertId, null,
-//                null, null, null);
-//        cursor.moveToFirst();
-//        Comment newComment = cursorToComment(cursor);
-//        cursor.close();
-//        return newComment;
     }
 
 
@@ -104,11 +85,8 @@ public class DBCon {
         values.put(DatabaseHelper.COURSE_MENTOR_PHONE_TWO, course.getCourseMentorPhoneTwo());
         values.put(DatabaseHelper.COURSE_MENTOR_EMAIL_ONE, course.getCourseMentorEmailOne());
         values.put(DatabaseHelper.COURSE_MENTOR_EMAIL_TWO, course.getCourseMentorEmailTwo());
-
-//may not need the following two lines
         values.put(DatabaseHelper.COURSE_NOTIFICATION_START, course.getCourseNotificationStart());
         values.put(DatabaseHelper.COURSE_NOTIFICATION_END, course.getCourseNotificationEnd());
-
         values.put(DatabaseHelper.COURSE_NOTES_TITLE, course.getCourseNotesTitle());
         values.put(DatabaseHelper.COURSE_NOTES_TEXT, course.getCourseNotesText());
 
@@ -121,10 +99,7 @@ public class DBCon {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.ASSESSMENT_NAME, assessment.getAssessmentName());
         values.put(DatabaseHelper.ASSESSMENT_TYPE, assessment.getAssessmentType());
-
-//may not need notification line
         values.put(DatabaseHelper.ASSESSMENT_NOTIFICATION, assessment.getAssessmentNotification());
-
         values.put(DatabaseHelper.ASSESSMENT_GOAL_DATE, assessment.getAssessmentGoalDate());
         long insertId = db.insert(DatabaseHelper.TABLE_ASSESSMENTS, null, values);
         assessment.setAssessmentId(insertId);
@@ -135,10 +110,11 @@ public class DBCon {
     //Update Methods
     public void updateTerm(TermModel term) {
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.TERM_TABLE_ID, term.getTermId());
         values.put(DatabaseHelper.TERM_NAME, term.getTermName());
         values.put(DatabaseHelper.TERM_START, term.getTermStart());
         values.put(DatabaseHelper.TERM_END, term.getTermEnd());
-        db.update(DatabaseHelper.TABLE_TERMS, values, DatabaseHelper.TERM_TABLE_ID + "="+term.getTermId(), null);
+        db.update(DatabaseHelper.TABLE_TERMS, values, DatabaseHelper.TERM_TABLE_ID + "=" + term.getTermId(), null);
     }
 
     public void updateCourse(CourseModel course) {
@@ -153,26 +129,20 @@ public class DBCon {
         values.put(DatabaseHelper.COURSE_MENTOR_PHONE_TWO, course.getCourseMentorPhoneTwo());
         values.put(DatabaseHelper.COURSE_MENTOR_EMAIL_ONE, course.getCourseMentorEmailOne());
         values.put(DatabaseHelper.COURSE_MENTOR_EMAIL_TWO, course.getCourseMentorEmailTwo());
-
-//may not need the following two lines
         values.put(DatabaseHelper.COURSE_NOTIFICATION_START, course.getCourseNotificationStart());
         values.put(DatabaseHelper.COURSE_NOTIFICATION_END, course.getCourseNotificationEnd());
-
         values.put(DatabaseHelper.COURSE_NOTES_TITLE, course.getCourseNotesTitle());
         values.put(DatabaseHelper.COURSE_NOTES_TEXT, course.getCourseNotesText());
-        db.update(DatabaseHelper.TABLE_COURSES, values, DatabaseHelper.COURSE_TABLE_ID + "="+course.getCourseId(), null);
+        db.update(DatabaseHelper.TABLE_COURSES, values, DatabaseHelper.COURSE_TABLE_ID + "=" + course.getCourseId(), null);
     }
 
     public void updateAssessment(AssessmentModel assessment) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.ASSESSMENT_NAME, assessment.getAssessmentName());
         values.put(DatabaseHelper.ASSESSMENT_TYPE, assessment.getAssessmentType());
-
-    //may not need notification line
         values.put(DatabaseHelper.ASSESSMENT_NOTIFICATION, assessment.getAssessmentNotification());
-
         values.put(DatabaseHelper.ASSESSMENT_GOAL_DATE, assessment.getAssessmentGoalDate());
-        db.update(DatabaseHelper.TABLE_ASSESSMENTS, values, DatabaseHelper.ASSESSMENT_TABLE_ID + "="+assessment.getAssessmentId(), null);
+        db.update(DatabaseHelper.TABLE_ASSESSMENTS, values, DatabaseHelper.ASSESSMENT_TABLE_ID + "=" + assessment.getAssessmentId(), null);
     }
 
 
@@ -191,13 +161,13 @@ public class DBCon {
                 + " = " + id, null);
     }
 
+
     public void deleteAssessment(AssessmentModel assessment) {
         long id = assessment.getCourseId();
         System.out.println("Assessment with id: " + id + " deleted");
         db.delete(DatabaseHelper.TABLE_ASSESSMENTS, DatabaseHelper.ASSESSMENT_TABLE_ID
                 + " = " + id, null);
     }
-
 
     //Get All data from each Table(Terms, Courses, Assessments)
     public List<TermModel> getAllTerms() {
@@ -239,11 +209,8 @@ public class DBCon {
                 course.setCourseMentorPhoneTwo(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_MENTOR_PHONE_TWO)));
                 course.setCourseMentorEmailOne(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_MENTOR_EMAIL_ONE)));
                 course.setCourseMentorEmailTwo(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_MENTOR_EMAIL_TWO)));
-
-//may not need notification lines
                 course.setCourseNotificationStart(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTIFICATION_START)));
                 course.setCourseNotificationEnd(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTIFICATION_END)));
-
                 course.setCourseNotesTitle(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTES_TITLE)));
                 course.setCourseNotesText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTES_TEXT)));
                 courseList.add(course);
@@ -256,7 +223,7 @@ public class DBCon {
         List<AssessmentModel> assessmentList = new ArrayList<AssessmentModel>();
 
         Cursor cursor = db.query(DatabaseHelper.TABLE_ASSESSMENTS,
-                assessmentColumns,null, null, null, null, null);
+                assessmentColumns, null, null, null, null, null);
 
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
@@ -285,8 +252,6 @@ public class DBCon {
 
     private CourseModel cursorToCourse(Cursor cursor) {
         CourseModel course = new CourseModel();
-
-//TermID???????
         course.setCourseTermId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TERM_ID)));
         course.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TABLE_ID)));
         course.setCourseName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NAME)));
@@ -299,11 +264,8 @@ public class DBCon {
         course.setCourseMentorPhoneTwo(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_MENTOR_PHONE_TWO)));
         course.setCourseMentorEmailOne(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_MENTOR_EMAIL_ONE)));
         course.setCourseMentorEmailTwo(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_MENTOR_EMAIL_TWO)));
-
-//may not need notification lines
         course.setCourseNotificationStart(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTIFICATION_START)));
         course.setCourseNotificationEnd(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTIFICATION_END)));
-
         course.setCourseNotesTitle(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTES_TITLE)));
         course.setCourseNotesText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTES_TEXT)));
         return course;
@@ -311,18 +273,12 @@ public class DBCon {
 
     private AssessmentModel cursorToAssessment(Cursor cursor) {
         AssessmentModel assessment = new AssessmentModel();
-//CourseId
         assessment.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_COURSE_ID)));
-
         assessment.setAssessmentId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_TABLE_ID)));
         assessment.setAssessmentName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_NAME)));
         assessment.setAssessmentGoalDate(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_GOAL_DATE)));
         assessment.setAssessmentType(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_TYPE)));
-
-//may not need notification lines
         assessment.setAssessmentNotification(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_NOTIFICATION)));
         return assessment;
     }
-
-
 }
