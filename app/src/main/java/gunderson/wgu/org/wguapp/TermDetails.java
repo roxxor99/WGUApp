@@ -39,22 +39,41 @@ public class TermDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
-                Bundle extras = addCourse.getExtras();
-                extras.putLong("termId", termId);
-//            if(termId == null){
-//                Toast.makeText(this, "You must save a Term before adding courses", Toast.LENGTH_LONG).show();
-//            }
-                startActivity(addCourse);
+                //If term does not exist-> prompt user to save one before any courses can be added
+                if (termId == 0) {
+//                    Intent addCourseError = new Intent(TermDetails.this, TermDetails.class);
+                    Toast.makeText(getApplicationContext(),
+                            "You must save a term before adding courses", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
+                    Bundle extras = new Bundle();
+                    extras.putLong("termId", termId);
+                    addCourse.putExtras(extras);
+                    if (extras != null) {
+                        extras.putLong("termId", termId);
+
+                        startActivity(addCourse);
+                    }
+                }
+
+//                Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
+//                Bundle extras = addCourse.getExtras();
+//                if (extras != null)
+//                extras.putLong("termId", termId);
+
+//                startActivity(addCourse);
             }
         });
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
         addCourse();
+
+        //need to call CourseList to display in lvCourseList
 
         //variables for the controls
         termNameEditText = findViewById(R.id.ptTermDetailsName);

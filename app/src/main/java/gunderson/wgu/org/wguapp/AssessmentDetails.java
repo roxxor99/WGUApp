@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +21,12 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class AssessmentDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner typeSpinner;
-    ArrayAdapter<CharSequence> adapter;
+    //move to onCreate line 76 on CourseDetails
+
+    private Spinner mTypeSpinner;
+    private long courseId;
+    private long assessmentId;
+    public EditText assessmentNameEditText;
 
     //DatePicker
     private TextView mGoalDate;
@@ -35,16 +40,36 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_details);
 
+        //variables for controls
+        assessmentNameEditText = findViewById(R.id.ptAssessmentDetailName);
+        mGoalDate = findViewById(R.id.tvAssessmentDetailGoalDate);
+        mTypeSpinner = findViewById(R.id.spinnerAssessmentDetailType);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+
+            courseId = extras.getLong("assessmentCourseId");
+            assessmentId = extras.getLong("assessmentId");
+            String assessmentName = extras.getString("assessmentName");
+            String assessmentGoal = extras.getString("assessmentGoalDate");
+            //not sure if this should be type Spinner
+            String courseStatus = extras.getString("assessmentType");
+
+            //Assign to proper controls
+            assessmentNameEditText.setText(assessmentName);
+            mGoalDate.setText(assessmentGoal);
+            //??? setPrompt?
+            mTypeSpinner.setPrompt(courseStatus);
+        }
+
         //Spinner
-        typeSpinner = findViewById(R.id.spinnerAssessmentDetailType);
+        ArrayAdapter<CharSequence> adapter;
         adapter = ArrayAdapter.createFromResource(this, R.array.assessment_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(adapter);
-        typeSpinner.setOnItemSelectedListener(this);
+        mTypeSpinner.setAdapter(adapter);
+        mTypeSpinner.setOnItemSelectedListener(this);
 
         //DatePicker
-        mGoalDate = findViewById(R.id.tvAssessmentDetailGoalDate);
-
         mGoalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             //get today's date
@@ -81,6 +106,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //get id of item selected in menu
@@ -98,11 +124,39 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         String sSelected = adapterView.getItemAtPosition(position).toString();
-//        Toast.makeText(this, sSelected, Toast.LENGTH_SHORT).show();
     }
+
     //Spinner
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 
+    public void saveAssessment(View view) {
+        //Create variables
+        String assessmentName = assessmentNameEditText.getText().toString();
+        String assessmentGoal = mGoalDate.getText().toString();
+        String assessmentType = mTypeSpinner.getSelectedItem().toString();
+
+        //set variables with data
+        final AssessmentModel assessment = new AssessmentModel();
+        assessment.setCourseId(courseId);
+        assessment.setAssessmentId(assessmentId);
+        assessment.setAssessmentName(assessmentName);
+        assessment.setAssessmentGoalDate(assessmentGoal);
+        assessment.setAssessmentType(assessmentType);
+
+
+        DBCon datasource = new DBCon(this);
+        datasource.open();
+        Bundle extras = getIntent().getExtras();
+
+        if (extras == null) {
+            datasource.createAssessment(assessment);
+        } else {
+            datasource.updateAssessment(assessment);
+        }
+
+        datasource.close();
+        finish();
     }
 }

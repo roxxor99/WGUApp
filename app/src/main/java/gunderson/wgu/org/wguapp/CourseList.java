@@ -32,7 +32,7 @@ public class CourseList extends ListActivity {
         setContentView(R.layout.activity_course_list);
         configAddCourse();
 
-        //Send selected list item to TermDetails
+        //Send selected list item to CourseDetails
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class CourseList extends ListActivity {
                 intent.putExtra("courseName", course.getCourseName());
                 intent.putExtra("courseStart", course.getCourseStart());
                 intent.putExtra("courseEnd", course.getCourseEnd());
-                intent.putExtra("status", course.getCourseStatus());
+                intent.putExtra("courseStatus", course.getCourseStatus());
 
                 startActivity(intent);
             }

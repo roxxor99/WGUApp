@@ -22,8 +22,6 @@ import java.util.Calendar;
 
 
 public class CourseDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    //private DBCon datasource;
-
     //not sure if should be String, EditText, or Spinner
     private Spinner mStatusSpinner;
     private long termId;
@@ -31,13 +29,11 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     public EditText courseNameEditText;
     private TextView mCourseName;
 
-
     //DatePicker
     private TextView mCourseStartDate;
     private TextView mCourseEndDate;
     private DatePickerDialog.OnDateSetListener mStartDateSetListener;
     private DatePickerDialog.OnDateSetListener mEndDateSetListener;
-
 
     private static final String TAG = "CourseDetails";
 
@@ -56,7 +52,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            termId = extras.getLong("termId");
+            termId = extras.getLong("courseTermId");
             courseId = extras.getLong("courseId");
             String courseName = extras.getString("courseName");
             String courseStart = extras.getString("courseStart");
@@ -68,7 +64,8 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
             mCourseEndDate.setText(courseEnd);
-            //mStatusSpinner(courseStatus);
+            //??? setPrompt?
+            mStatusSpinner.setPrompt(courseStatus);
         }
 
         //Spinner
@@ -78,7 +75,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         mStatusSpinner.setAdapter(adapter);
         mStatusSpinner.setOnItemSelectedListener(this);
 
-
+        //DatePicker
         mCourseStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             //get today's date
@@ -172,16 +169,61 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btnCourseDetailNotes:
-                    Intent openNotes = new Intent(CourseDetails.this, Notes.class);
-                    startActivity(openNotes);
+
+                    //If course does not exist-> prompt user to save one before notes can be added
+                    if (courseId == 0) {
+                        Toast.makeText(getApplicationContext(),
+                                "You must save a course before adding notes", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent openNotes = new Intent(CourseDetails.this, Notes.class);
+                        Bundle extras = new Bundle();
+                        extras.putLong("courseTermId", courseId);
+                        openNotes.putExtras(extras);
+                        if (extras != null) {
+                            extras.putLong("courseTermId", courseId);
+
+                            startActivity(openNotes);
+                        }
+                    }
+
                     break;
+
                 case R.id.btnCourseDetailManageAss:
-                    Intent openAssessment = new Intent(CourseDetails.this, AssessmentDetails.class);
-                    startActivity(openAssessment);
+                    //If course does not exist-> prompt user to save one before assessments can be added
+                    if (courseId == 0) {
+                        Toast.makeText(getApplicationContext(),
+                                "You must save a course before adding assessments", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent openAssessment = new Intent(CourseDetails.this, AssessmentDetails.class);
+                        Bundle extras = new Bundle();
+                        extras.putLong("courseTermId", courseId);
+                        openAssessment.putExtras(extras);
+                        if (extras != null) {
+                            extras.putLong("courseTermId", courseId);
+
+                            startActivity(openAssessment);
+                        }
+                    }
+
                     break;
+
                 case R.id.ptCourseDetailManageMen:
-                    Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
-                    startActivity(openMentors);
+                    //If course does not exist-> prompt user to save one before mentors can be added
+                    if (courseId == 0) {
+                        Toast.makeText(getApplicationContext(),
+                                "You must save a course before adding mentors", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
+                        Bundle extras = new Bundle();
+                        extras.putLong("courseTermId", courseId);
+                        openMentors.putExtras(extras);
+                        if (extras != null) {
+                            extras.putLong("courseTermId", courseId);
+
+                            startActivity(openMentors);
+                        }
+                    }
+
                     break;
             }
         }
@@ -196,13 +238,12 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     //Spinner
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
 
     public void saveCourse(View view) {
         //Create variables
-        String courseName = mCourseName.getText().toString();
+        String courseName = courseNameEditText.getText().toString();
         String courseStart = mCourseStartDate.getText().toString();
         String courseEnd = mCourseEndDate.getText().toString();
         String courseStatus = mStatusSpinner.getSelectedItem().toString();
@@ -210,6 +251,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         //set variables with data
         final CourseModel course = new CourseModel();
         course.setCourseTermId(termId);
+        course.setCourseId(courseId);
         course.setCourseName(courseName);
         course.setCourseStart(courseStart);
         course.setCourseEnd(courseEnd);
