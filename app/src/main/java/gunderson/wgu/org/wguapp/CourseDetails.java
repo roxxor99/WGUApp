@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,40 +22,62 @@ import java.util.Calendar;
 
 
 public class CourseDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private DBCon datasource;
+    //private DBCon datasource;
+
+    //not sure if should be String, EditText, or Spinner
     private Spinner mStatusSpinner;
+    private long termId;
+    private long courseId;
+    public EditText courseNameEditText;
+    private TextView mCourseName;
+
 
     //DatePicker
-    private TextView mCourseName;
     private TextView mCourseStartDate;
     private TextView mCourseEndDate;
     private DatePickerDialog.OnDateSetListener mStartDateSetListener;
     private DatePickerDialog.OnDateSetListener mEndDateSetListener;
-    private long termId;
+
+
     private static final String TAG = "CourseDetails";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            termId = extras.getLong("termId");
-        }
-
         defineButtons();
 
-        //Spinner
+        //variables for controls
+        courseNameEditText = findViewById(R.id.ptCourseDetailCourseName);
+        mCourseStartDate = findViewById(R.id.tvCourseDetailStartDate);
+        mCourseEndDate = findViewById(R.id.tvCourseDetailEndDate);
         mStatusSpinner = findViewById(R.id.spinnerCourseDetailStatus);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+
+            termId = extras.getLong("termId");
+            courseId = extras.getLong("courseId");
+            String courseName = extras.getString("courseName");
+            String courseStart = extras.getString("courseStart");
+            String courseEnd = extras.getString("courseEnd");
+            //not sure if this should be type Spinner
+            String courseStatus = extras.getString("courseStatus");
+
+            //Assign to proper controls
+            courseNameEditText.setText(courseName);
+            mCourseStartDate.setText(courseStart);
+            mCourseEndDate.setText(courseEnd);
+            //mStatusSpinner(courseStatus);
+        }
+
+        //Spinner
         ArrayAdapter<CharSequence> adapter;
         adapter = ArrayAdapter.createFromResource(this, R.array.course_detail, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mStatusSpinner.setAdapter(adapter);
         mStatusSpinner.setOnItemSelectedListener(this);
 
-
-        mCourseStartDate = findViewById(R.id.tvCourseDetailStartDate);
-        mCourseEndDate = findViewById(R.id.tvCourseDetailEndDate);
 
         mCourseStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,14 +138,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         };
     }
 
-    //Appbar
+    //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    //Appbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //get id of item selected in menu
@@ -130,7 +152,9 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
 
         if (id == R.id.menuDelete) {
             Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
-//place holder for delete action returns to mainlanding
+
+            //DBCon deleteCourse
+            //place holder for delete action returns to mainlanding
             startActivity(new Intent(this, MainLanding.class));
         }
         return super.onOptionsItemSelected(item);
@@ -141,7 +165,6 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         findViewById(R.id.btnCourseDetailNotes).setOnClickListener(buttonClickListener);
         findViewById(R.id.btnCourseDetailManageAss).setOnClickListener(buttonClickListener);
         findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
-//        findViewById(R.id.btnCourseDetailDeleteCourse).setOnClickListener(buttonClickListener);
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
@@ -160,10 +183,6 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                     Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
                     startActivity(openMentors);
                     break;
-//                case R.id.btnCourseDetailDeleteCourse:
-//                    Intent deleteCourse = new Intent(CourseDetails.this, MentorList.class);
-//                    startActivity(deleteCourse);
-//                    break;
             }
         }
     };
@@ -182,21 +201,20 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
 
 
     public void saveCourse(View view) {
-
         //Create variables
         String courseName = mCourseName.getText().toString();
         String courseStart = mCourseStartDate.getText().toString();
         String courseEnd = mCourseEndDate.getText().toString();
-        String status = mStatusSpinner.getSelectedItem().toString();
-//        String status = mStatusSpinner.getText().toString();
-        //add spinner same as textedit
+        String courseStatus = mStatusSpinner.getSelectedItem().toString();
 
+        //set variables with data
         final CourseModel course = new CourseModel();
         course.setCourseTermId(termId);
         course.setCourseName(courseName);
         course.setCourseStart(courseStart);
         course.setCourseEnd(courseEnd);
-        //add spinner
+        course.setCourseStatus(courseStatus);
+
 
         DBCon datasource = new DBCon(this);
         datasource.open();

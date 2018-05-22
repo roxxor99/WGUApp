@@ -42,7 +42,9 @@ public class TermDetails extends AppCompatActivity {
                 Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
                 Bundle extras = addCourse.getExtras();
                 extras.putLong("termId", termId);
-
+//            if(termId == null){
+//                Toast.makeText(this, "You must save a Term before adding courses", Toast.LENGTH_LONG).show();
+//            }
                 startActivity(addCourse);
             }
         });
@@ -139,9 +141,10 @@ public class TermDetails extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    //get id of item selected in menu
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //get id of item selected in menu
         int id = item.getItemId();
 
         //TODO:
@@ -151,12 +154,11 @@ public class TermDetails extends AppCompatActivity {
             Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainLanding.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void saveTerm(View view) {
-
+        //Create variables
         String termName = termNameEditText.getText().toString();
         String termStart = mTermStartDate.getText().toString();
         String termEnd = mTermEndDate.getText().toString();
