@@ -27,7 +27,6 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     private long termId;
     private long courseId;
     public EditText courseNameEditText;
-    private TextView mCourseName;
 
     //DatePicker
     private TextView mCourseStartDate;
@@ -52,7 +51,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            termId = extras.getLong("courseTermId");
+            termId = extras.getLong("termId");
             courseId = extras.getLong("courseId");
             String courseName = extras.getString("courseName");
             String courseStart = extras.getString("courseStart");
@@ -196,13 +195,10 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                     } else {
                         Intent openAssessment = new Intent(CourseDetails.this, AssessmentDetails.class);
                         Bundle extras = new Bundle();
-                        extras.putLong("courseTermId", courseId);
+                        extras.putLong("courseId", courseId);
                         openAssessment.putExtras(extras);
-                        if (extras != null) {
-                            extras.putLong("courseTermId", courseId);
 
-                            startActivity(openAssessment);
-                        }
+                        startActivity(openAssessment);
                     }
 
                     break;
@@ -262,7 +258,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         datasource.open();
         Bundle extras = getIntent().getExtras();
 
-        if (extras == null) {
+        if (courseId == 0) {
             datasource.createCourse(course);
         } else {
             datasource.updateCourse(course);

@@ -66,6 +66,11 @@ public class TermDetails extends AppCompatActivity {
         });
     }
 
+    public void viewCourses(View view) {
+        Intent viewCourses = new Intent(TermDetails.this, CourseList.class);
+        startActivity(viewCourses);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

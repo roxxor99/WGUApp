@@ -48,7 +48,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            courseId = extras.getLong("assessmentCourseId");
+            courseId = extras.getLong("courseId");
             assessmentId = extras.getLong("assessmentId");
             String assessmentName = extras.getString("assessmentName");
             String assessmentGoal = extras.getString("assessmentGoalDate");

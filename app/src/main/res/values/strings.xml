@@ -52,6 +52,7 @@
     <string name="mentorName">Mentor Name</string>
     <string name="mentorPhoneEx">1-800-227-1000</string>
     <string name="mentorEmailEx">email@wgu.edu</string>
+    <string name="viewCourses">View Courses</string>
 
 
 </resources>

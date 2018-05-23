@@ -49,6 +49,11 @@ public class CourseModel {
 
     public CourseModel() {
     }
+    //CourseListView display
+    @Override
+    public String toString() {
+        return "Course Name: " + courseName + "\n Start: " + courseStart + "\n End: " + courseEnd;
+    }
 
     public long getCourseId() {
         return courseId;
