@@ -56,14 +56,15 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             String courseName = extras.getString("courseName");
             String courseStart = extras.getString("courseStart");
             String courseEnd = extras.getString("courseEnd");
-            //not sure if this should be type Spinner
+//          TODO
             String courseStatus = extras.getString("courseStatus");
 
             //Assign to proper controls
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
             mCourseEndDate.setText(courseEnd);
-            //??? setPrompt?
+//!!! This is wrong
+//          TODO
             mStatusSpinner.setPrompt(courseStatus);
         }
 
@@ -176,10 +177,10 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                     } else {
                         Intent openNotes = new Intent(CourseDetails.this, Notes.class);
                         Bundle extras = new Bundle();
-                        extras.putLong("courseTermId", courseId);
+                        extras.putLong("courseId", courseId);
                         openNotes.putExtras(extras);
                         if (extras != null) {
-                            extras.putLong("courseTermId", courseId);
+                            extras.putLong("courseId", courseId);
 
                             startActivity(openNotes);
                         }
@@ -193,7 +194,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                         Toast.makeText(getApplicationContext(),
                                 "You must save a course before adding assessments", Toast.LENGTH_LONG).show();
                     } else {
-                        Intent openAssessment = new Intent(CourseDetails.this, AssessmentDetails.class);
+                        Intent openAssessment = new Intent(CourseDetails.this, AssessmentList.class);
                         Bundle extras = new Bundle();
                         extras.putLong("courseId", courseId);
                         openAssessment.putExtras(extras);
@@ -211,10 +212,10 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                     } else {
                         Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
                         Bundle extras = new Bundle();
-                        extras.putLong("courseTermId", courseId);
+                        extras.putLong("courseId", courseId);
                         openMentors.putExtras(extras);
                         if (extras != null) {
-                            extras.putLong("courseTermId", courseId);
+                            extras.putLong("courseId", courseId);
 
                             startActivity(openMentors);
                         }
