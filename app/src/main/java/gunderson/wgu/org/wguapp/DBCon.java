@@ -163,7 +163,7 @@ public class DBCon {
 
 
     public void deleteAssessment(AssessmentModel assessment) {
-        long id = assessment.getCourseId();
+        long id = assessment.getAssessmentId();
         System.out.println("Assessment with id: " + id + " deleted");
         db.delete(DatabaseHelper.TABLE_ASSESSMENTS, DatabaseHelper.ASSESSMENT_TABLE_ID
                 + " = " + id, null);
@@ -228,7 +228,7 @@ public class DBCon {
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 AssessmentModel assessment = new AssessmentModel();
-                assessment.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TABLE_ID)));
+//                assessment.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TABLE_ID)));
 
                 assessment.setAssessmentId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_TABLE_ID)));
                 assessment.setAssessmentName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_NAME)));

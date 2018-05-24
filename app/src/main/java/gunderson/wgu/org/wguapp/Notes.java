@@ -28,16 +28,13 @@ public class Notes extends MainLanding {
         int id = item.getItemId();
 
         if (id == R.id.menuShare){
-            Toast.makeText(this, "attach was clicked", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this, ShareNotes.class));
 
-//ShareNotes
-//Need to tell it what to send still. Replace "This is my text to send..." with data.
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send...");
-            sendIntent.setType("text/plain");
-            startActivity(Intent.createChooser(sendIntent, "Send this message to:" ));
+////Need to tell it what to send still. Replace "This is my text to send..." with data.
+//            Intent sendIntent = new Intent();
+//            sendIntent.setAction(Intent.ACTION_SEND);
+//            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send...");
+//            sendIntent.setType("text/plain");
+//            startActivity(Intent.createChooser(sendIntent, "Send this message to:" ));
         }
 
         if (id == R.id.menuDelete){

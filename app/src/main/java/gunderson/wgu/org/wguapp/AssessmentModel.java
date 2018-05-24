@@ -25,6 +25,12 @@ public class AssessmentModel {
     public AssessmentModel(){
     }
 
+    //AssessmentListView display
+    @Override
+    public String toString() {
+        return "Assessment Name: " + assessmentName + "\n Goal: " + assessmentGoalDate + "\n Type: " + assessmentType;
+    }
+
     //Getters
     public long getAssessmentId() {
         return assessmentId;

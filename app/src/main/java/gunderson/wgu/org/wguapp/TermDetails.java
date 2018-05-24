@@ -45,7 +45,7 @@ public class TermDetails extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "You must save a term before adding courses", Toast.LENGTH_LONG).show();
                 } else {
-                    Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
+                    Intent addCourse = new Intent(TermDetails.this, CourseList.class);
                     Bundle extras = new Bundle();
                     extras.putLong("termId", termId);
                     addCourse.putExtras(extras);
@@ -55,22 +55,9 @@ public class TermDetails extends AppCompatActivity {
                         startActivity(addCourse);
                     }
                 }
-
-//                Intent addCourse = new Intent(TermDetails.this, CourseDetails.class);
-//                Bundle extras = addCourse.getExtras();
-//                if (extras != null)
-//                extras.putLong("termId", termId);
-
-//                startActivity(addCourse);
             }
         });
     }
-
-    public void viewCourses(View view) {
-        Intent viewCourses = new Intent(TermDetails.this, CourseList.class);
-        startActivity(viewCourses);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
