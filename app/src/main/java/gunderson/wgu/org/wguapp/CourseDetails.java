@@ -47,6 +47,15 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         mCourseEndDate = findViewById(R.id.tvCourseDetailEndDate);
         mStatusSpinner = findViewById(R.id.spinnerCourseDetailStatus);
 
+
+        //Spinner
+        ArrayAdapter<CharSequence> adapter;
+        adapter = ArrayAdapter.createFromResource(this, R.array.course_detail, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mStatusSpinner.setAdapter(adapter);
+        mStatusSpinner.setOnItemSelectedListener(this);
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
@@ -55,24 +64,16 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             String courseName = extras.getString("courseName");
             String courseStart = extras.getString("courseStart");
             String courseEnd = extras.getString("courseEnd");
-//          TODO
             String courseStatus = extras.getString("courseStatus");
 
             //Assign to proper controls
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
             mCourseEndDate.setText(courseEnd);
-//!!! This is wrong
+//!!! This is wrong need to get selected item from the array -> enhanced loop?
 //          TODO
-            mStatusSpinner.setPrompt(courseStatus);
+            mStatusSpinner.setSelection(1);
         }
-
-        //Spinner
-        ArrayAdapter<CharSequence> adapter;
-        adapter = ArrayAdapter.createFromResource(this, R.array.course_detail, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mStatusSpinner.setAdapter(adapter);
-        mStatusSpinner.setOnItemSelectedListener(this);
 
         //DatePicker
         mCourseStartDate.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +164,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
     }
 
+
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -225,11 +227,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         }
     };
 
+
     //Spinner
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         String sSelected = adapterView.getItemAtPosition(position).toString();
     }
+
 
     //Spinner
     @Override

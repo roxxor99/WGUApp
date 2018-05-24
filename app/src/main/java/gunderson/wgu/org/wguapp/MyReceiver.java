@@ -7,23 +7,22 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
-
-public class AlarmReceiver extends BroadcastReceiver {
+public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context, "Notify", Toast.LENGTH_SHORT).show();
         createNotification(context);
     }
 
     private void createNotification(Context context) { //String msgTitle, String msgTicker, String msgText, String msgInfo){
-
         PendingIntent mIntent = PendingIntent.getActivity(context, 0,
                 new Intent(context, MainLanding.class), 0);
 
         //Build the notification
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.owl)
-//                .setTicker("Alert From WGU")
                 .setContentTitle("Alert From WGU")
                 .setContentText("Important Date Event")
                 .setContentInfo("Please check the scheduler for an important date event.")
@@ -38,6 +37,4 @@ public class AlarmReceiver extends BroadcastReceiver {
         mManager.notify(1, mBuilder.build());
 
     }
-
-
 }

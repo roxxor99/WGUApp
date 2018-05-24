@@ -2,11 +2,15 @@ package gunderson.wgu.org.wguapp;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +25,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AssessmentDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner mTypeSpinner;
     private long courseId;
     private long assessmentId;
     public EditText assessmentNameEditText;
+    Calendar cal;
 
     //DatePicker
     private TextView mGoalDate;
@@ -35,10 +42,32 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
 
     private static final String TAG = "AssessmentDetails";
 
+
+
+
+    //Notification Channels
+//    NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+//    NotificationChannel channel = new NotificationChannel("default", "channel1", notificationManager.IMPORTANCE_DEFAULT);
+//    notificationManager.createNotificationChannel(channel);
+//    NotificationCompat.Builder startNotification;
+//    private static final int uniqueId = 12345;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_details);
+
+
+
+        //Notification start date - need to identify the channel!
+//        startNotification = new NotificationCompat.Builder(this, "channel1");
+//        startNotification.setAutoCancel(true);
+
+
+
 
         //variables for controls
         assessmentNameEditText = findViewById(R.id.ptAssessmentDetailName);
@@ -74,7 +103,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
             @Override
             //get today's date
             public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
+                cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -101,13 +130,35 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
     }
 
     public void setAlert(View view) {
-//        AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent mIntent = new Intent(this, AlarmReceiver.class);
-//        mIntent.putExtra("event", );
-//        PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
+        AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent mIntent = new Intent(this, MyReceiver.class);
+        PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
+
+        mAlarm.set(AlarmManager.RTC_WAKEUP, cal.get(Calendar.MILLISECOND), notifyIntent);
+
+
+//        String today = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+////        LocalDate now = new LocalDate;
 //
-//        mAlarm.set(AlarmManager.RTC_WAKEUP, cal.get )
+//        //Build the start notification
+//        startNotification.setSmallIcon(R.drawable.owl);
+//        startNotification.setTicker("WGU Assessment Start");
+////        startNotification.setWhen(System.currentTimeMillis());
+////        startNotification.setWhen(DBCon..);
+//        startNotification.setContentTitle("Assessment Start Alert");
+//        startNotification.setContentText("You have a new Assessment starting");
+//
+//        //when clicked return to AssessmentDetails
+//        Intent intent = new Intent(this, AssessmentDetails.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        startNotification.setContentIntent(pendingIntent);
+//
+//        //Builds notification and sends to device
+//        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//        nm.notify(12345, startNotification.build());
     }
+
+
 
     //Appbar
     @Override
@@ -146,6 +197,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
     }
 
     public void saveAssessment(View view) {
+        setAlert(view);
         //Create variables
         String assessmentName = assessmentNameEditText.getText().toString();
         String assessmentGoal = mGoalDate.getText().toString();

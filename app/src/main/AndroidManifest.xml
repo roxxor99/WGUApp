@@ -26,7 +26,11 @@
         <activity android:name=".TermDetails" />
         <activity android:name=".NotesList" />
         <activity android:name=".AssessmentList" />
-        <receiver android:name=".AlarmReceiver"/>
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
 
 </manifest>
