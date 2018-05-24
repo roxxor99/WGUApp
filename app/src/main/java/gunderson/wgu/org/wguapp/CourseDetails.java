@@ -22,7 +22,6 @@ import java.util.Calendar;
 
 
 public class CourseDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    //not sure if should be String, EditText, or Spinner
     private Spinner mStatusSpinner;
     private long termId;
     private long courseId;

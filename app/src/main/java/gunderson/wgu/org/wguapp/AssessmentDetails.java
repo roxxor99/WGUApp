@@ -1,6 +1,9 @@
 package gunderson.wgu.org.wguapp;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,8 +24,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class AssessmentDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    //move to onCreate line 76 on CourseDetails
-
     private Spinner mTypeSpinner;
     private long courseId;
     private long assessmentId;
@@ -33,7 +34,6 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
     private DatePickerDialog.OnDateSetListener mGoalDateSetListener;
 
     private static final String TAG = "AssessmentDetails";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +100,15 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         };
     }
 
+    public void setAlert(View view) {
+//        AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        Intent mIntent = new Intent(this, AlarmReceiver.class);
+//        mIntent.putExtra("event", );
+//        PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
+//
+//        mAlarm.set(AlarmManager.RTC_WAKEUP, cal.get )
+    }
+
     //Appbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,13 +118,18 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+//        final AssessmentModel assessment = new AssessmentModel();
         //get id of item selected in menu
         int id = item.getItemId();
 
         if (id == R.id.menuDelete) {
+            DBCon datasource = new DBCon(this);
+            datasource.open();
+//            datasource.deleteAssessment(this, assessmentId);
+            datasource.close();
+
             Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
-//place holder for delete action returns to mainlanding
-            startActivity(new Intent(this, MainLanding.class));
+            startActivity(new Intent(this, AssessmentList.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -150,7 +164,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         datasource.open();
         Bundle extras = getIntent().getExtras();
 
-        if (extras == null) {
+        if (assessmentId == 0) {
             datasource.createAssessment(assessment);
         } else {
             datasource.updateAssessment(assessment);

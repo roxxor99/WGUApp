@@ -14,6 +14,7 @@ import java.util.List;
 public class CourseList extends ListActivity {
     public Button btnAddCourse;
 
+
     public void configAddCourse() {
         btnAddCourse = findViewById(R.id.btnAddCourse);
         btnAddCourse.setOnClickListener(new View.OnClickListener() {
@@ -25,6 +26,7 @@ public class CourseList extends ListActivity {
             }
         });
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class CourseList extends ListActivity {
                 Intent intent = new Intent(CourseList.this, CourseDetails.class);
                 CourseModel course = (CourseModel) parent.getItemAtPosition(position);
                 //get info
+                //Do I need to get termId to associate courses with terms?
+//                intent.putExtra("termId", course.getCourseTermId());
                 intent.putExtra("courseId", course.getCourseId());
                 intent.putExtra("courseName", course.getCourseName());
                 intent.putExtra("courseStart", course.getCourseStart());

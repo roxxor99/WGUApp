@@ -14,6 +14,7 @@ import java.util.List;
 public class AssessmentList extends ListActivity {
     public Button btnAddAssessment;
 
+
     public void configAddAssessment() {
         btnAddAssessment = findViewById(R.id.btnAddAssessment);
         btnAddAssessment.setOnClickListener(new View.OnClickListener() {
@@ -26,21 +27,23 @@ public class AssessmentList extends ListActivity {
         });
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_list);
         configAddAssessment();
 
-
         //Send selected list item to CourseDetails
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(AssessmentList.this, CourseDetails.class);
+                Intent intent = new Intent(AssessmentList.this, AssessmentDetails.class);
                 AssessmentModel assessment = (AssessmentModel) parent.getItemAtPosition(position);
                 //get info
+                //Do I need to get courseId to associate assessments with courses?
+//                intent.putExtra("courseId", assessment.getCourseId());
                 intent.putExtra("assessmentId", assessment.getAssessmentId());
                 intent.putExtra("assessmentName", assessment.getAssessmentName());
                 intent.putExtra("assessmentGoalDate", assessment.getAssessmentGoalDate());
