@@ -32,7 +32,7 @@ public class TermDetails extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mEndDateSetListener;
 
     private static final String TAG = "TermDetails";
-
+//manage courses
     public void addCourse() {
         btnTermDetailsAddCourse = findViewById(R.id.btnTermDetailsAddCourse);
         btnTermDetailsAddCourse.setOnClickListener(new View.OnClickListener() {
@@ -162,8 +162,13 @@ public class TermDetails extends AppCompatActivity {
         //need an exception on delete that checks for associated courseId and denys delete if present.
         //delete term
         if (id == R.id.menuDelete) {
-            Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MainLanding.class));
+            DBCon datasource = new DBCon(this);
+            datasource.open();
+            datasource.deleteTerm(termId);
+            datasource.close();
+            finish();
+
+            Toast.makeText(this, "Cannot delete a term with courses associated to it", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

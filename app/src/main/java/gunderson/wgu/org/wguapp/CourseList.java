@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CourseList extends ListActivity {
     public Button btnAddCourse;
-
+    private long termId;
 
     public void configAddCourse() {
         btnAddCourse = findViewById(R.id.btnAddCourse);
@@ -22,6 +22,8 @@ public class CourseList extends ListActivity {
             @Override
             public void onClick(View view) {
                 Intent addCourse = new Intent(CourseList.this, CourseDetails.class);
+                addCourse.putExtra("termId", termId);
+
                 startActivity(addCourse);
             }
         });
@@ -34,6 +36,9 @@ public class CourseList extends ListActivity {
         setContentView(R.layout.activity_course_list);
         configAddCourse();
 
+        Bundle extras = getIntent().getExtras();
+        termId = extras.getLong("termId");
+
         //Send selected list item to CourseDetails
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -42,8 +47,8 @@ public class CourseList extends ListActivity {
                 Intent intent = new Intent(CourseList.this, CourseDetails.class);
                 CourseModel course = (CourseModel) parent.getItemAtPosition(position);
                 //get info
-                //Do I need to get termId to associate courses with terms?
-//                intent.putExtra("termId", course.getCourseTermId());
+
+                intent.putExtra("termId", course.getCourseTermId());
                 intent.putExtra("courseId", course.getCourseId());
                 intent.putExtra("courseName", course.getCourseName());
                 intent.putExtra("courseStart", course.getCourseStart());
@@ -67,7 +72,7 @@ public class CourseList extends ListActivity {
         super.onResume();
         DBCon datasource = new DBCon(this);
         datasource.open();
-        List<CourseModel> listValue = datasource.getAllCourses();
+        List<CourseModel> listValue = datasource.getCourses(termId);
         datasource.close();
         ArrayAdapter<CourseModel> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, listValue);

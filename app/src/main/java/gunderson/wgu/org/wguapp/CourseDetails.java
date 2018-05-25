@@ -70,9 +70,9 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
             mCourseEndDate.setText(courseEnd);
-//!!! This is wrong need to get selected item from the array -> enhanced loop?
-//          TODO
-            mStatusSpinner.setSelection(1);
+
+            int statusPosition = adapter.getPosition(courseStatus);
+            mStatusSpinner.setSelection(statusPosition);
         }
 
         //DatePicker

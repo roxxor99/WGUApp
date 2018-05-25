@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import junit.framework.TestResult;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +79,7 @@ public class DBCon {
     public CourseModel createCourse(CourseModel course) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COURSE_NAME, course.getCourseName());
+        values.put(DatabaseHelper.COURSE_TERM_ID, course.getCourseTermId());
         values.put(DatabaseHelper.COURSE_START, course.getCourseStart());
         values.put(DatabaseHelper.COURSE_END, course.getCourseEnd());
         values.put(DatabaseHelper.COURSE_STATUS, course.getCourseStatus());
@@ -147,8 +151,7 @@ public class DBCon {
 
 
     //Delete Methods
-    public void deleteTerm(TermModel term) {
-        long id = term.getTermId();
+    public void deleteTerm(long id) {
         System.out.println("Term with id: " + id + " deleted");
         db.delete(DatabaseHelper.TABLE_TERMS, DatabaseHelper.TERM_TABLE_ID
                 + " = " + id, null);
@@ -189,16 +192,17 @@ public class DBCon {
         return termList;
     }
 
-    public List<CourseModel> getAllCourses() {
+    public List<CourseModel> getCourses(long termId) {
         List<CourseModel> courseList = new ArrayList<CourseModel>();
-
+        String[] selectionArgs = {Long.toString(termId)};
         Cursor cursor = db.query(DatabaseHelper.TABLE_COURSES,
-                courseColumns, null, null, null, null, null);
+                courseColumns, DatabaseHelper.COURSE_TERM_ID + " = ?", selectionArgs, null, null, null);
 
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 CourseModel course = new CourseModel();
                 course.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TABLE_ID)));
+                course.setCourseTermId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TERM_ID)));
                 course.setCourseName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NAME)));
                 course.setCourseStart(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_START)));
                 course.setCourseEnd(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_END)));

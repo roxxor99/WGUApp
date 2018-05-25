@@ -70,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COURSE_NOTES_TEXT + " TEXT, " +
 
                     "FOREIGN KEY(" + COURSE_TERM_ID + ") REFERENCES " + TABLE_TERMS + "(" + TERM_TABLE_ID + ")" +
-                    ")";
+                    "ON DELETE RESTRICT)";
 
     // Table: Assessment
     public static final String TABLE_ASSESSMENTS = "assessments";
