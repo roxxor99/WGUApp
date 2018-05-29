@@ -56,14 +56,13 @@ public class AssessmentModel {
         return assessmentNotification;
     }
 
-
     //Setters
     public void setAssessmentId(long assessmentId) {
         this.assessmentId = assessmentId;
     }
 
     public void setCourseId(long assessmentId) {
-        this.assessmentId = assessmentId;
+        this.courseId = assessmentId;
     }
 
     public void setAssessmentName(String assessmentName) {

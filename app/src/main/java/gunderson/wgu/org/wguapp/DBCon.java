@@ -6,13 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import junit.framework.TestResult;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-//Datasource
+//DataSource
 public class DBCon {
     private SQLiteOpenHelper dbHelper;
     private SQLiteDatabase db;
@@ -64,22 +61,22 @@ public class DBCon {
         dbHelper.close();
     }
 
+    //Create Methods
     public TermModel createTerm(TermModel term) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.TERM_NAME, term.getTermName());
         values.put(DatabaseHelper.TERM_START, term.getTermStart());
         values.put(DatabaseHelper.TERM_END, term.getTermEnd());
+
         long insertId = db.insert(DatabaseHelper.TABLE_TERMS, null, values);
         term.setTermId(insertId);
         return term;
     }
 
-
-    //Create Methods
     public CourseModel createCourse(CourseModel course) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COURSE_NAME, course.getCourseName());
         values.put(DatabaseHelper.COURSE_TERM_ID, course.getCourseTermId());
+        values.put(DatabaseHelper.COURSE_NAME, course.getCourseName());
         values.put(DatabaseHelper.COURSE_START, course.getCourseStart());
         values.put(DatabaseHelper.COURSE_END, course.getCourseEnd());
         values.put(DatabaseHelper.COURSE_STATUS, course.getCourseStatus());
@@ -101,10 +98,12 @@ public class DBCon {
 
     public AssessmentModel createAssessment(AssessmentModel assessment) {
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.ASSESSMENT_COURSE_ID, assessment.getCourseId());
         values.put(DatabaseHelper.ASSESSMENT_NAME, assessment.getAssessmentName());
         values.put(DatabaseHelper.ASSESSMENT_TYPE, assessment.getAssessmentType());
         values.put(DatabaseHelper.ASSESSMENT_NOTIFICATION, assessment.getAssessmentNotification());
         values.put(DatabaseHelper.ASSESSMENT_GOAL_DATE, assessment.getAssessmentGoalDate());
+
         long insertId = db.insert(DatabaseHelper.TABLE_ASSESSMENTS, null, values);
         assessment.setAssessmentId(insertId);
         return assessment;
@@ -123,6 +122,7 @@ public class DBCon {
 
     public void updateCourse(CourseModel course) {
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COURSE_TABLE_ID, course.getCourseId());
         values.put(DatabaseHelper.COURSE_NAME, course.getCourseName());
         values.put(DatabaseHelper.COURSE_START, course.getCourseStart());
         values.put(DatabaseHelper.COURSE_END, course.getCourseEnd());
@@ -142,6 +142,7 @@ public class DBCon {
 
     public void updateAssessment(AssessmentModel assessment) {
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.ASSESSMENT_TABLE_ID, assessment.getAssessmentId());
         values.put(DatabaseHelper.ASSESSMENT_NAME, assessment.getAssessmentName());
         values.put(DatabaseHelper.ASSESSMENT_TYPE, assessment.getAssessmentType());
         values.put(DatabaseHelper.ASSESSMENT_NOTIFICATION, assessment.getAssessmentNotification());
@@ -149,6 +150,13 @@ public class DBCon {
         db.update(DatabaseHelper.TABLE_ASSESSMENTS, values, DatabaseHelper.ASSESSMENT_TABLE_ID + "=" + assessment.getAssessmentId(), null);
     }
 
+    public void updateNotes(long id, String notesName, String notesBody) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COURSE_TABLE_ID, id);
+        values.put(DatabaseHelper.COURSE_NOTES_TITLE, notesName);
+        values.put(DatabaseHelper.COURSE_NOTES_TEXT, notesBody);
+        db.update(DatabaseHelper.TABLE_COURSES, values, DatabaseHelper.COURSE_TABLE_ID + "=" + id, null);
+    }
 
     //Delete Methods
     public void deleteTerm(long id) {
@@ -157,16 +165,16 @@ public class DBCon {
                 + " = " + id, null);
     }
 
-    public void deleteCourse(CourseModel course) {
-        long id = course.getCourseId();
+    public void deleteCourse(long id) {
         System.out.println("Course with id: " + id + " deleted");
         db.delete(DatabaseHelper.TABLE_COURSES, DatabaseHelper.COURSE_TABLE_ID
                 + " = " + id, null);
     }
 
 
-    public void deleteAssessment(AssessmentModel assessment) {
-        long id = assessment.getAssessmentId();
+    //    public void deleteAssessment(AssessmentModel assessment) {
+    public void deleteAssessment(long id) {
+//        long id = assessment.getAssessmentId();
         System.out.println("Assessment with id: " + id + " deleted");
         db.delete(DatabaseHelper.TABLE_ASSESSMENTS, DatabaseHelper.ASSESSMENT_TABLE_ID
                 + " = " + id, null);
@@ -223,20 +231,20 @@ public class DBCon {
         return courseList;
     }
 
-    public List<AssessmentModel> getAllAssessments() {
+    public List<AssessmentModel> getAssessments(long courseId) {
         List<AssessmentModel> assessmentList = new ArrayList<AssessmentModel>();
-
+        String[] selectionArgs = {Long.toString(courseId)};
         Cursor cursor = db.query(DatabaseHelper.TABLE_ASSESSMENTS,
-                assessmentColumns, null, null, null, null, null);
+                assessmentColumns, DatabaseHelper.ASSESSMENT_COURSE_ID + " = ?", selectionArgs, null, null, null);
 
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 AssessmentModel assessment = new AssessmentModel();
-//                assessment.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TABLE_ID)));
-
                 assessment.setAssessmentId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_TABLE_ID)));
+                assessment.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_COURSE_ID)));
                 assessment.setAssessmentName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_NAME)));
                 assessment.setAssessmentGoalDate(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_GOAL_DATE)));
+                assessment.setAssessmentType(cursor.getString(cursor.getColumnIndex(DatabaseHelper.ASSESSMENT_TYPE)));
                 assessmentList.add(assessment);
             }
         }

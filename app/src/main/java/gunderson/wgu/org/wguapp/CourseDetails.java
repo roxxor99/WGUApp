@@ -27,6 +27,15 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     private long courseId;
     public EditText courseNameEditText;
 
+    public EditText ptMentorDetailName;
+    public EditText ptMentorDetailPhone;
+    public EditText ptMentorDetailEmail;
+    public EditText ptMentor2DetailName;
+    public EditText ptMentor2DetailPhone;
+    public EditText ptMentor2DetailEmail;
+//    String notesName;
+//    String notesBody;
+
     //DatePicker
     private TextView mCourseStartDate;
     private TextView mCourseEndDate;
@@ -39,6 +48,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
+
         defineButtons();
 
         //variables for controls
@@ -46,6 +56,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         mCourseStartDate = findViewById(R.id.tvCourseDetailStartDate);
         mCourseEndDate = findViewById(R.id.tvCourseDetailEndDate);
         mStatusSpinner = findViewById(R.id.spinnerCourseDetailStatus);
+
+        ptMentorDetailName = findViewById(R.id.ptMentorDetailName);
+        ptMentorDetailPhone = findViewById(R.id.ptMentorDetailPhone);
+        ptMentorDetailEmail = findViewById(R.id.ptMentorDetailEmail);
+        ptMentor2DetailName = findViewById(R.id.ptMentor2DetailName);
+        ptMentor2DetailPhone = findViewById(R.id.ptMentor2DetailPhone);
+        ptMentor2DetailEmail = findViewById(R.id.ptMentor2DetailEmail);
 
 
         //Spinner
@@ -66,10 +83,24 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             String courseEnd = extras.getString("courseEnd");
             String courseStatus = extras.getString("courseStatus");
 
+            String mentorName = extras.getString("mentorName");
+            String mentorPhone = extras.getString("mentorPhone");
+            String mentorEmail = extras.getString("mentorEmail");
+            String mentor2Name = extras.getString("mentor2Name");
+            String mentor2Phone = extras.getString("mentor2Phone");
+            String mentor2Email = extras.getString("mentor2Email");
+
             //Assign to proper controls
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
             mCourseEndDate.setText(courseEnd);
+
+            ptMentorDetailName.setText(mentorName);
+            ptMentorDetailPhone.setText(mentorPhone);
+            ptMentorDetailEmail.setText(mentorEmail);
+            ptMentor2DetailName.setText(mentor2Name);
+            ptMentor2DetailPhone.setText(mentor2Phone);
+            ptMentor2DetailEmail.setText(mentor2Email);
 
             int statusPosition = adapter.getPosition(courseStatus);
             mStatusSpinner.setSelection(statusPosition);
@@ -148,11 +179,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         int id = item.getItemId();
 
         if (id == R.id.menuDelete) {
-            Toast.makeText(this, "Delete was clicked", Toast.LENGTH_SHORT).show();
+            DBCon datasource = new DBCon(this);
+            datasource.open();
+            datasource.deleteCourse(courseId);
+            datasource.close();
+            finish();
 
-            //DBCon deleteCourse
-            //place holder for delete action returns to mainlanding
-            startActivity(new Intent(this, MainLanding.class));
+            Toast.makeText(this, "Course was deleted", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -161,7 +194,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     public void defineButtons() {
         findViewById(R.id.btnCourseDetailNotes).setOnClickListener(buttonClickListener);
         findViewById(R.id.btnCourseDetailManageAss).setOnClickListener(buttonClickListener);
-        findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
+//        findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
     }
 
 
@@ -179,6 +212,8 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                         Intent openNotes = new Intent(CourseDetails.this, Notes.class);
                         Bundle extras = new Bundle();
                         extras.putLong("courseId", courseId);
+//                        extras.putString("notesTitle", notesName);
+//                        extras.putString("notesBody", notesBody);
                         openNotes.putExtras(extras);
                         if (extras != null) {
                             extras.putLong("courseId", courseId);
@@ -205,28 +240,27 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
 
                     break;
 
-                case R.id.ptCourseDetailManageMen:
-                    //If course does not exist-> prompt user to save one before mentors can be added
-                    if (courseId == 0) {
-                        Toast.makeText(getApplicationContext(),
-                                "You must save a course before adding mentors", Toast.LENGTH_LONG).show();
-                    } else {
-                        Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
-                        Bundle extras = new Bundle();
-                        extras.putLong("courseId", courseId);
-                        openMentors.putExtras(extras);
-                        if (extras != null) {
-                            extras.putLong("courseId", courseId);
-
-                            startActivity(openMentors);
-                        }
-                    }
-
-                    break;
+//                case R.id.ptCourseDetailManageMen:
+//                    //If course does not exist-> prompt user to save one before mentors can be added
+//                    if (courseId == 0) {
+//                        Toast.makeText(getApplicationContext(),
+//                                "You must save a course before adding mentors", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
+//                        Bundle extras = new Bundle();
+//                        extras.putLong("courseId", courseId);
+//                        openMentors.putExtras(extras);
+//                        if (extras != null) {
+//                            extras.putLong("courseId", courseId);
+//
+//                            startActivity(openMentors);
+//                        }
+//                    }
+//
+//                    break;
             }
         }
     };
-
 
     //Spinner
     @Override
@@ -234,12 +268,10 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         String sSelected = adapterView.getItemAtPosition(position).toString();
     }
 
-
     //Spinner
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
-
 
     public void saveCourse(View view) {
         //Create variables
@@ -247,6 +279,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         String courseStart = mCourseStartDate.getText().toString();
         String courseEnd = mCourseEndDate.getText().toString();
         String courseStatus = mStatusSpinner.getSelectedItem().toString();
+
+        String mentorName = ptMentorDetailName.getText().toString();
+        String mentorPhone = ptMentorDetailPhone.getText().toString();
+        String mentorEmail = ptMentorDetailEmail.getText().toString();
+        String mentor2Name = ptMentor2DetailName.getText().toString();
+        String mentor2Phone = ptMentor2DetailPhone.getText().toString();
+        String mentor2Email = ptMentor2DetailEmail.getText().toString();
 
         //set variables with data
         final CourseModel course = new CourseModel();
@@ -257,10 +296,16 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         course.setCourseEnd(courseEnd);
         course.setCourseStatus(courseStatus);
 
+        course.setCourseMentorOne(mentorName);
+        course.setCourseMentorPhoneOne(mentorPhone);
+        course.setCourseMentorEmailOne(mentorEmail);
+        course.setCourseMentorTwo(mentor2Name);
+        course.setCourseMentorPhoneTwo(mentor2Phone);
+        course.setCourseMentorEmailTwo(mentor2Email);
+
 
         DBCon datasource = new DBCon(this);
         datasource.open();
-        Bundle extras = getIntent().getExtras();
 
         if (courseId == 0) {
             datasource.createCourse(course);

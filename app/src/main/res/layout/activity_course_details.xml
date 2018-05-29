@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/tvCourseDetailStartDate"
                 android:layout_width="340dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -95,7 +95,7 @@
             <TextView
                 android:id="@+id/tvCourseDetailEndDate"
                 android:layout_width="340dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -136,6 +136,78 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ptCourseDetailEndDate" />
 
+            <EditText
+                android:id="@+id/ptMentorDetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="@string/mentorName"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentorDetailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorPhoneEx"
+                android:inputType="phone"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentorDetailEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorEmailEx"
+                android:inputType="textEmailAddress"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentor2DetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="53dp"
+                android:ems="10"
+                android:hint="@string/mentorName"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentor2DetailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorPhoneEx"
+                android:inputType="phone"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/ptMentor2DetailEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/mentorEmailEx"
+                android:inputType="textEmailAddress"
+                android:textAlignment="center" />
+
             <Button
                 android:id="@+id/btnCourseDetailManageAss"
                 android:layout_width="match_parent"
@@ -147,15 +219,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerCourseDetailStatus" />
-
-            <Button
-                android:id="@+id/ptCourseDetailManageMen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/manageMentors" />
 
             <Button
                 android:id="@+id/btnCourseDetailNotes"

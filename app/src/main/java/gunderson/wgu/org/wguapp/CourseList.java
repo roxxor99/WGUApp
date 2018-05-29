@@ -46,14 +46,25 @@ public class CourseList extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CourseList.this, CourseDetails.class);
                 CourseModel course = (CourseModel) parent.getItemAtPosition(position);
-                //get info
 
+                //get info
                 intent.putExtra("termId", course.getCourseTermId());
                 intent.putExtra("courseId", course.getCourseId());
                 intent.putExtra("courseName", course.getCourseName());
                 intent.putExtra("courseStart", course.getCourseStart());
                 intent.putExtra("courseEnd", course.getCourseEnd());
                 intent.putExtra("courseStatus", course.getCourseStatus());
+
+                intent.putExtra("mentorName", course.getCourseMentorOne());
+                intent.putExtra("mentorPhone", course.getCourseMentorPhoneOne());
+                intent.putExtra("mentorEmail", course.getCourseMentorEmailOne());
+                intent.putExtra("mentor2Name", course.getCourseMentorTwo());
+                intent.putExtra("mentor2Phone", course.getCourseMentorPhoneTwo());
+                intent.putExtra("mentor2Email", course.getCourseMentorEmailTwo());
+
+                intent.putExtra("notesName", course.getCourseNotesTitle());
+                intent.putExtra("notesBody", course.getCourseNotesText());
+
 
                 startActivity(intent);
             }

@@ -11,9 +11,9 @@ import android.widget.ListView;
 
 import java.util.List;
 
-
 public class TermList extends ListActivity {
     public Button btnAddTerm;
+
 
     public void configAddTerm() {
         btnAddTerm = findViewById(R.id.btnAddTerm);

@@ -32,16 +32,15 @@ public class TermDetails extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mEndDateSetListener;
 
     private static final String TAG = "TermDetails";
-//manage courses
+
+
     public void addCourse() {
         btnTermDetailsAddCourse = findViewById(R.id.btnTermDetailsAddCourse);
         btnTermDetailsAddCourse.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                //If term does not exist-> prompt user to save one before any courses can be added
                 if (termId == 0) {
-//                    Intent addCourseError = new Intent(TermDetails.this, TermDetails.class);
                     Toast.makeText(getApplicationContext(),
                             "You must save a term before adding courses", Toast.LENGTH_LONG).show();
                 } else {
@@ -65,9 +64,7 @@ public class TermDetails extends AppCompatActivity {
         setContentView(R.layout.activity_term_details);
         addCourse();
 
-        //need to call CourseList to display in lvCourseList
-
-        //variables for the controls
+        //Variables for the controls
         termNameEditText = findViewById(R.id.ptTermDetailsName);
         mTermStartDate = findViewById(R.id.tvTermDetailsStart);
         mTermEndDate = findViewById(R.id.tvTermDetailsEnd);

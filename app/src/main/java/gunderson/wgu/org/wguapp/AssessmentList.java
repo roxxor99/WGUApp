@@ -13,6 +13,7 @@ import java.util.List;
 
 public class AssessmentList extends ListActivity {
     public Button btnAddAssessment;
+    private long courseId;
 
 
     public void configAddAssessment() {
@@ -22,6 +23,8 @@ public class AssessmentList extends ListActivity {
             @Override
             public void onClick(View view) {
                 Intent addAssessment = new Intent(AssessmentList.this, AssessmentDetails.class);
+                addAssessment.putExtra("courseId", courseId);
+
                 startActivity(addAssessment);
             }
         });
@@ -34,16 +37,21 @@ public class AssessmentList extends ListActivity {
         setContentView(R.layout.activity_assessment_list);
         configAddAssessment();
 
-        //Send selected list item to CourseDetails
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            courseId = extras.getLong("courseId");
+        }
+
+        //Send selected list item to AssessmentDetails
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(AssessmentList.this, AssessmentDetails.class);
                 AssessmentModel assessment = (AssessmentModel) parent.getItemAtPosition(position);
+
                 //get info
-                //Do I need to get courseId to associate assessments with courses?
-//                intent.putExtra("courseId", assessment.getCourseId());
+                intent.putExtra("courseId", assessment.getCourseId());
                 intent.putExtra("assessmentId", assessment.getAssessmentId());
                 intent.putExtra("assessmentName", assessment.getAssessmentName());
                 intent.putExtra("assessmentGoalDate", assessment.getAssessmentGoalDate());
@@ -66,7 +74,7 @@ public class AssessmentList extends ListActivity {
         super.onResume();
         DBCon datasource = new DBCon(this);
         datasource.open();
-        List<AssessmentModel> listValue = datasource.getAllAssessments();
+        List<AssessmentModel> listValue = datasource.getAssessments(courseId);
         datasource.close();
         ArrayAdapter<AssessmentModel> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, listValue);
