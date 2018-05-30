@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Notify", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Notification set", Toast.LENGTH_SHORT).show();
         createNotification(context);
     }
 

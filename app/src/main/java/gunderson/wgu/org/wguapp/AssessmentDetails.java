@@ -22,14 +22,17 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AssessmentDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner mTypeSpinner;
     private long courseId;
     private long assessmentId;
     public EditText assessmentNameEditText;
-    Calendar cal;
+
 
     //DatePicker
     private TextView mGoalDate;
@@ -78,7 +81,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
             @Override
             //get today's date
             public void onClick(View view) {
-                cal = Calendar.getInstance();
+                Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -105,34 +108,35 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
     }
 
     //    public void setAlert(View view) {
-    public void setAlert(Calendar cal) {
-//        AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent mIntent = new Intent(this, MyReceiver.class);
-//        PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 1, mIntent, 0);
-//
-//        //initiate a Switch
-//        Switch switchGoalAlert = findViewById(R.id.ptAssessmentDetailGoalAlert);
-//        // check current state of a Switch (true or false).
-//        Boolean switchState = switchGoalAlert.isChecked();
-//
-//        if (switchState == false) {
-//            return;
-//        } else {
-////            if (switchState != null) {
-//                assert mAlarm != null;
-//                mAlarm.set(AlarmManager.RTC_WAKEUP, cal.get(Calendar.MILLISECOND), notifyIntent);
-////            }else{
-////                return;
-////            }
-//        }
+    public void setAlert() {
+        try {
+            AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent mIntent = new Intent(this, MyReceiver.class);
 
-        AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent mIntent = new Intent(this, MyReceiver.class);
-        PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 1, mIntent, 0);
+            PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 1, mIntent, 0);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            String assessmentGoal = mGoalDate.getText().toString();
+            Date goalDate = sdf.parse(assessmentGoal);
 
-        mAlarm.set(AlarmManager.RTC_WAKEUP, cal.get(Calendar.MILLISECOND), notifyIntent);
-//        mAlarm.setExact(AlarmManager.RTC_WAKEUP, cal.get(Calendar.MILLISECOND), notifyIntent);
 
+            //initiate a Switch
+            Switch switchGoalAlert = findViewById(R.id.ptAssessmentDetailGoalAlert);
+            // check current state of a Switch (true or false).
+            boolean switchState = switchGoalAlert.isChecked();
+
+            if (switchState) {
+                long triggerAtMillis = goalDate.getTime();
+                mAlarm.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, notifyIntent);
+            } else {
+                mAlarm.cancel(notifyIntent);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 //        String today = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
 ////        LocalDate now = new LocalDate;
@@ -153,7 +157,6 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
 //        //Builds notification and sends to device
 //        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 //        nm.notify(12345, startNotification.build());
-    }
 
 
     //Appbar
@@ -192,7 +195,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
     }
 
     public void saveAssessment(View view) {
-        setAlert(cal);
+        setAlert();
         //Create variables
         String assessmentName = assessmentNameEditText.getText().toString();
         String assessmentGoal = mGoalDate.getText().toString();

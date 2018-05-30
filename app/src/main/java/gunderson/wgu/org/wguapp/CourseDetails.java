@@ -90,6 +90,9 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             String mentor2Phone = extras.getString("mentor2Phone");
             String mentor2Email = extras.getString("mentor2Email");
 
+//            String notesName = extras.getString("notesName");
+//            String notesBody = extras.getString("notesBody");
+
             //Assign to proper controls
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
