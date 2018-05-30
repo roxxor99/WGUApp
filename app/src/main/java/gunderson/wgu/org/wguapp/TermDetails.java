@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class TermDetails extends AppCompatActivity {
@@ -155,17 +156,19 @@ public class TermDetails extends AppCompatActivity {
         //get id of item selected in menu
         int id = item.getItemId();
 
-        //TODO:
-        //need an exception on delete that checks for associated courseId and denys delete if present.
-        //delete term
+
         if (id == R.id.menuDelete) {
             DBCon datasource = new DBCon(this);
             datasource.open();
-            datasource.deleteTerm(termId);
+            List<CourseModel> listValue = datasource.getCourses(termId);
+            if (listValue.isEmpty()) {
+                datasource.deleteTerm(termId);
+
+            } else {
+                Toast.makeText(this, "Cannot delete a term with courses associated to it", Toast.LENGTH_SHORT).show();
+            }
             datasource.close();
             finish();
-
-            Toast.makeText(this, "Cannot delete a term with courses associated to it", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

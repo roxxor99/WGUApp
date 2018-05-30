@@ -107,7 +107,6 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         };
     }
 
-    //    public void setAlert(View view) {
     public void setAlert() {
         try {
             AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -117,7 +116,6 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             String assessmentGoal = mGoalDate.getText().toString();
             Date goalDate = sdf.parse(assessmentGoal);
-
 
             //initiate a Switch
             Switch switchGoalAlert = findViewById(R.id.ptAssessmentDetailGoalAlert);
@@ -134,29 +132,7 @@ public class AssessmentDetails extends AppCompatActivity implements AdapterView.
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
-
-//        String today = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
-////        LocalDate now = new LocalDate;
-//
-//        //Build the start notification
-//        startNotification.setSmallIcon(R.drawable.owl);
-//        startNotification.setTicker("WGU Assessment Start");
-////        startNotification.setWhen(System.currentTimeMillis());
-////        startNotification.setWhen(DBCon..);
-//        startNotification.setContentTitle("Assessment Start Alert");
-//        startNotification.setContentText("You have a new Assessment starting");
-//
-//        //when clicked return to AssessmentDetails
-//        Intent intent = new Intent(this, AssessmentDetails.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        startNotification.setContentIntent(pendingIntent);
-//
-//        //Builds notification and sends to device
-//        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//        nm.notify(12345, startNotification.build());
 
 
     //Appbar

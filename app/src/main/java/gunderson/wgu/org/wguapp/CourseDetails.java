@@ -1,6 +1,9 @@
 package gunderson.wgu.org.wguapp;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,11 +18,14 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.util.Date;
 
 public class CourseDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner mStatusSpinner;
@@ -33,8 +39,6 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     public EditText ptMentor2DetailName;
     public EditText ptMentor2DetailPhone;
     public EditText ptMentor2DetailEmail;
-//    String notesName;
-//    String notesBody;
 
     //DatePicker
     private TextView mCourseStartDate;
@@ -56,7 +60,6 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         mCourseStartDate = findViewById(R.id.tvCourseDetailStartDate);
         mCourseEndDate = findViewById(R.id.tvCourseDetailEndDate);
         mStatusSpinner = findViewById(R.id.spinnerCourseDetailStatus);
-
         ptMentorDetailName = findViewById(R.id.ptMentorDetailName);
         ptMentorDetailPhone = findViewById(R.id.ptMentorDetailPhone);
         ptMentorDetailEmail = findViewById(R.id.ptMentorDetailEmail);
@@ -75,14 +78,12 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-
             termId = extras.getLong("termId");
             courseId = extras.getLong("courseId");
             String courseName = extras.getString("courseName");
             String courseStart = extras.getString("courseStart");
             String courseEnd = extras.getString("courseEnd");
             String courseStatus = extras.getString("courseStatus");
-
             String mentorName = extras.getString("mentorName");
             String mentorPhone = extras.getString("mentorPhone");
             String mentorEmail = extras.getString("mentorEmail");
@@ -90,14 +91,10 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
             String mentor2Phone = extras.getString("mentor2Phone");
             String mentor2Email = extras.getString("mentor2Email");
 
-//            String notesName = extras.getString("notesName");
-//            String notesBody = extras.getString("notesBody");
-
             //Assign to proper controls
             courseNameEditText.setText(courseName);
             mCourseStartDate.setText(courseStart);
             mCourseEndDate.setText(courseEnd);
-
             ptMentorDetailName.setText(mentorName);
             ptMentorDetailPhone.setText(mentorPhone);
             ptMentorDetailEmail.setText(mentorEmail);
@@ -169,6 +166,62 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         };
     }
 
+    public void setStartAlert() {
+        try {
+            AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent mIntent = new Intent(this, MyReceiver.class);
+
+            PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 2, mIntent, 0);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            String assessmentGoal = mCourseStartDate.getText().toString();
+            Date goalDate = sdf.parse(assessmentGoal);
+
+            //initiate a Switch
+            Switch switchGoalAlert = findViewById(R.id.ptCourseDetailStartAlert);
+            // check current state of a Switch
+            boolean switchState = switchGoalAlert.isChecked();
+
+            if (switchState) {
+                long triggerAtMillis = goalDate.getTime();
+                mAlarm.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, notifyIntent);
+            } else {
+                mAlarm.cancel(notifyIntent);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void setEndAlert() {
+        try {
+            AlarmManager mAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent mIntent = new Intent(this, MyReceiver.class);
+
+            PendingIntent notifyIntent = PendingIntent.getBroadcast(this, 3, mIntent, 0);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            String assessmentGoal = mCourseEndDate.getText().toString();
+            Date goalDate = sdf.parse(assessmentGoal);
+
+            //initiate a Switch
+            Switch switchGoalAlert = findViewById(R.id.ptCourseDetailEndAlert);
+            // check current state of a Switch
+            boolean switchState = switchGoalAlert.isChecked();
+
+            if (switchState) {
+                long triggerAtMillis = goalDate.getTime();
+                mAlarm.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, notifyIntent);
+            } else {
+                mAlarm.cancel(notifyIntent);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -178,9 +231,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //get id of item selected in menu
         int id = item.getItemId();
-
         if (id == R.id.menuDelete) {
             DBCon datasource = new DBCon(this);
             datasource.open();
@@ -197,9 +248,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     public void defineButtons() {
         findViewById(R.id.btnCourseDetailNotes).setOnClickListener(buttonClickListener);
         findViewById(R.id.btnCourseDetailManageAss).setOnClickListener(buttonClickListener);
-//        findViewById(R.id.ptCourseDetailManageMen).setOnClickListener(buttonClickListener);
     }
-
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
@@ -215,16 +264,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
                         Intent openNotes = new Intent(CourseDetails.this, Notes.class);
                         Bundle extras = new Bundle();
                         extras.putLong("courseId", courseId);
-//                        extras.putString("notesTitle", notesName);
-//                        extras.putString("notesBody", notesBody);
                         openNotes.putExtras(extras);
+
                         if (extras != null) {
                             extras.putLong("courseId", courseId);
-
                             startActivity(openNotes);
                         }
                     }
-
                     break;
 
                 case R.id.btnCourseDetailManageAss:
@@ -240,27 +286,7 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
 
                         startActivity(openAssessment);
                     }
-
                     break;
-
-//                case R.id.ptCourseDetailManageMen:
-//                    //If course does not exist-> prompt user to save one before mentors can be added
-//                    if (courseId == 0) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "You must save a course before adding mentors", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        Intent openMentors = new Intent(CourseDetails.this, MentorDetails.class);
-//                        Bundle extras = new Bundle();
-//                        extras.putLong("courseId", courseId);
-//                        openMentors.putExtras(extras);
-//                        if (extras != null) {
-//                            extras.putLong("courseId", courseId);
-//
-//                            startActivity(openMentors);
-//                        }
-//                    }
-//
-//                    break;
             }
         }
     };
@@ -277,12 +303,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void saveCourse(View view) {
+        setStartAlert();
+        setEndAlert();
         //Create variables
         String courseName = courseNameEditText.getText().toString();
         String courseStart = mCourseStartDate.getText().toString();
         String courseEnd = mCourseEndDate.getText().toString();
         String courseStatus = mStatusSpinner.getSelectedItem().toString();
-
         String mentorName = ptMentorDetailName.getText().toString();
         String mentorPhone = ptMentorDetailPhone.getText().toString();
         String mentorEmail = ptMentorDetailEmail.getText().toString();
@@ -298,7 +325,6 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         course.setCourseStart(courseStart);
         course.setCourseEnd(courseEnd);
         course.setCourseStatus(courseStatus);
-
         course.setCourseMentorOne(mentorName);
         course.setCourseMentorPhoneOne(mentorPhone);
         course.setCourseMentorEmailOne(mentorEmail);
@@ -306,16 +332,13 @@ public class CourseDetails extends AppCompatActivity implements AdapterView.OnIt
         course.setCourseMentorPhoneTwo(mentor2Phone);
         course.setCourseMentorEmailTwo(mentor2Email);
 
-
         DBCon datasource = new DBCon(this);
         datasource.open();
-
         if (courseId == 0) {
             datasource.createCourse(course);
         } else {
             datasource.updateCourse(course);
         }
-
         datasource.close();
         finish();
     }

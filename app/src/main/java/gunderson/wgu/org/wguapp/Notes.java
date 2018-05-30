@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.List;
+
 
 public class Notes extends MainLanding {
 
@@ -25,16 +27,18 @@ public class Notes extends MainLanding {
         ptNotesName = findViewById(R.id.ptNotesName);
         etNotesMultiText = findViewById(R.id.etNotesMultiText);
 
-//!!gets the values from the bundle which we do not currently have set for notesName or notesBody return null
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             courseId = extras.getLong("courseId");
-            notesName = extras.getString("notesName");
-            notesBody = extras.getString("notesBody");
+
+            DBCon datasource = new DBCon(this);
+            datasource.open();
+            CourseModel cm = datasource.getNotes(courseId);
 
             //Assign to proper controls
-            ptNotesName.setText(notesName);
-            etNotesMultiText.setText(notesBody);
+            ptNotesName.setText(cm.getCourseNotesTitle());
+            etNotesMultiText.setText(cm.getCourseNotesText());
+            datasource.close();
         }
     }
 

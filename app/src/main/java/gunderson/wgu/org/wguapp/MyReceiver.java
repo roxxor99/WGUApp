@@ -16,7 +16,7 @@ public class MyReceiver extends BroadcastReceiver {
         createNotification(context);
     }
 
-    private void createNotification(Context context) { //String msgTitle, String msgTicker, String msgText, String msgInfo){
+    private void createNotification(Context context) {
         PendingIntent mIntent = PendingIntent.getActivity(context, 0,
                 new Intent(context, MainLanding.class), 0);
 

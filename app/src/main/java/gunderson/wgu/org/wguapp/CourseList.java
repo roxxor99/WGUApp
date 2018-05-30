@@ -62,10 +62,6 @@ public class CourseList extends ListActivity {
                 intent.putExtra("mentor2Phone", course.getCourseMentorPhoneTwo());
                 intent.putExtra("mentor2Email", course.getCourseMentorEmailTwo());
 
-                intent.putExtra("notesName", course.getCourseNotesTitle());
-                intent.putExtra("notesBody", course.getCourseNotesText());
-
-
                 startActivity(intent);
             }
         });

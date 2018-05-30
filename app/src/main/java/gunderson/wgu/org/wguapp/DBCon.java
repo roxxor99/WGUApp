@@ -251,6 +251,23 @@ public class DBCon {
         return assessmentList;
     }
 
+    public CourseModel getNotes(long courseId) {
+//        List<CourseModel> notesList = new ArrayList<CourseModel>();
+        CourseModel course = new CourseModel();
+        String[] selectionArgs = {Long.toString(courseId)};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_COURSES,
+                courseColumns, DatabaseHelper.COURSE_TABLE_ID + " = ?", selectionArgs, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                course.setCourseId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TABLE_ID)));
+                course.setCourseTermId(cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COURSE_TERM_ID)));
+                course.setCourseNotesTitle(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTES_TITLE)));
+                course.setCourseNotesText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COURSE_NOTES_TEXT)));
+            }
+        }
+        return course;
+    }
 
     //Cursor
     private TermModel cursorToTerm(Cursor cursor) {
